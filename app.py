@@ -13,11 +13,11 @@ away_shots_xg = []
 
 
 for i, x in enumerate(rows_home):
-    shot_xg = x.number_input(f"xG of home shot # {i}",min_value=0.01, max_value=0.99, step=0.01, key=i)
+    shot_xg = x.number_input(f"xG of home shot # {i+1}",min_value=0.01, max_value=0.99, step=0.01, key=i)
     home_shots_xg.append(shot_xg)
 
 for i, x in enumerate(rows_away):
-    shot_xg = x.number_input(f"xG of away shot # {i}",min_value=0.01, max_value=0.99, step=0.01, key=i)
+    shot_xg = x.number_input(f"xG of away shot # {i+1}",min_value=0.01, max_value=0.99, step=0.01, key=i)
     away_shots_xg.append(shot_xg)
 
 print(home_shots_xg)
