@@ -10,7 +10,7 @@ rng = np.random.default_rng(SEED)
 n_shots_home = st.sidebar.number_input("Number of shots (home team)", 0, 30, 1)
 rows_home = st.columns(n_shots_home)
 
-n_shots_home = st.sidebar.number_input("Number of shots (away team)", 0, 30, 1)
+n_shots_away = st.sidebar.number_input("Number of shots (away team)", 0, 30, 1)
 rows_away = st.columns(n_shots_home)
 
 home_shots_xg = []
@@ -27,26 +27,26 @@ for i, x in enumerate(rows_away):
 
 # print(home_shots_xg)
 
-home_goals = []
-away_goals = []
+home_goals = np.zeros((n_shots_home, N_SIMS))
+away_goals = np.zeros((n_shots_away, N_SIMS))
 
 for i in range(N_SIMS):
-    for shot_xg in home_shots_xg:
+    for s, shot_xg in enumerate(home_shots_xg):
         random = rng.random()
         if shot_xg >= random:
             outcome = 1
         else:
             outcome = 0
-        home_goals.append(outcome)
+        home_goals[s, i].append(outcome)
 
 for i in range(N_SIMS):
-    for shot_xg in away_shots_xg:
+    for s, shot_xg in enumerate(away_shots_xg):
         random = rng.random()
         if shot_xg >= random:
             outcome = 1
         else:
             outcome = 0
-        away_goals.append(outcome)
+        away_goals[s, i].append(outcome)
 
 
 mean_home_goals = np.mean(home_goals)
