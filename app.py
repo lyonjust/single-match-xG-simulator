@@ -1,8 +1,14 @@
 import pandas as pd
 import streamlit as st
 
-ncol = st.sidebar.number_input("Number of xG instances", 0, 20, 1)
-cols = st.beta_columns(ncol)
+n_shots_home = st.sidebar.number_input("Number of shots (home team)", 0, 30, 1)
+rows_home = st.rows(n_shots_home)
 
-for i, x in enumerate(cols):
-    x.selectbox(f"Input # {i}",[1,2,3], key=i)
+n_shots_home = st.sidebar.number_input("Number of shots (away team)", 0, 30, 1)
+rows_away = st.rows(n_shots_home)
+
+for i, x in enumerate(rows_home):
+    x.number_input(f"xG of home shot # {i}",min_value=0, max_value=1, step=0.01, key=i)
+
+for i, x in enumerate(rows_away):
+    x.number_input(f"xG of away shot # {i}",min_value=0, max_value=1, step=0.01, key=i)
