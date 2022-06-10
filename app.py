@@ -2,10 +2,10 @@ import pandas as pd
 import streamlit as st
 
 n_shots_home = st.sidebar.number_input("Number of shots (home team)", 0, 30, 1)
-rows_home = st.rows(n_shots_home)
+rows_home = st.columns(n_shots_home)
 
 n_shots_home = st.sidebar.number_input("Number of shots (away team)", 0, 30, 1)
-rows_away = st.rows(n_shots_home)
+rows_away = st.columns(n_shots_home)
 
 for i, x in enumerate(rows_home):
     x.number_input(f"xG of home shot # {i}",min_value=0, max_value=1, step=0.01, key=i)
