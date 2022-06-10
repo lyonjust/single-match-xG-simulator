@@ -49,8 +49,8 @@ for i in range(N_SIMS):
         away_goals.append(outcome)
 
 
-mean_home_goals = home_goals.mean()
-mean_away_goals = away_goals.mean()
+mean_home_goals = np.mean(home_goals)
+mean_away_goals = np.mean(away_goals)
 
 st.text('home goals: ' + str(mean_home_goals))
 
