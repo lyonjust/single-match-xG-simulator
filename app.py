@@ -33,7 +33,7 @@ away_goals = []
 for i in range(N_SIMS):
     for shot_xg in home_shots_xg:
         random = rng.random()
-        if random > shot_xg:
+        if shot_xg >= random:
             outcome = 1
         else:
             outcome = 0
@@ -42,7 +42,7 @@ for i in range(N_SIMS):
 for i in range(N_SIMS):
     for shot_xg in away_shots_xg:
         random = rng.random()
-        if random > shot_xg:
+        if shot_xg >= random:
             outcome = 1
         else:
             outcome = 0
@@ -53,4 +53,6 @@ mean_home_goals = np.mean(home_goals)
 mean_away_goals = np.mean(away_goals)
 
 st.text('home goals: ' + str(mean_home_goals))
+st.text('away goals: ' + str(mean_away_goals))
+
 
