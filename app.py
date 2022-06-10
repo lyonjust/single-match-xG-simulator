@@ -37,7 +37,7 @@ for i in range(N_SIMS):
             outcome = 1
         else:
             outcome = 0
-        home_goals[s, i].append(outcome)
+        home_goals[s, i] = outcome
 
 for i in range(N_SIMS):
     for s, shot_xg in enumerate(away_shots_xg):
@@ -46,7 +46,7 @@ for i in range(N_SIMS):
             outcome = 1
         else:
             outcome = 0
-        away_goals[s, i].append(outcome)
+        away_goals[s, i] = outcome
 
 
 mean_home_goals = np.mean(home_goals)
