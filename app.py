@@ -76,8 +76,8 @@ df_grouped = df_grouped[['proportion']]
 
 st.write(df_grouped)
 
-plot_title = 'Home team ' + sum(home_xg) + \
-    ' xG - Away team ' + sum(away_xg) + 'xG\n'
+plot_title = 'Home team ' + str(sum(home_xg)) + \
+    ' xG - Away team ' + str(sum(away_xg)) + 'xG\n'
 
 # plot_title = plot_title + 'Home team win ' +
 
