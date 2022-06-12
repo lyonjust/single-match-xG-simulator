@@ -9,15 +9,15 @@ SEED = 0
 
 rng = np.random.default_rng(SEED)
 
-default_value_home_shots = str([0.75, 0.75, 0.5, 0.4])
-default_value_away_shots = str(np.full(shape=20, fill_value=0.12))
+default_value_home_shots_string = '0.75, 0.75, 0.5, 0.4'
+default_value_away_shots_string = away_shots_xg = '0.12, ' * 19 + '0.12'
 
 home_shots = st.text_input(
     'Please enter the xG of all home team shots, separated by a comma (",")',
-    value=default_value_home_shots)
+    value=default_value_home_shots_string)
 away_shots = st.text_input(
     'Please enter the xG of all away team shots, separated by a comma (",")',
-    value=default_value_away_shots)
+    value=default_value_away_shots_string)
 
 
 def xg_to_array(xg_string):
