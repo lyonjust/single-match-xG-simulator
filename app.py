@@ -154,7 +154,7 @@ title = fig_text(x=0.05, y=1.2,
                  s='<' + plot_title + '>' + '\n\nActual outcome: Home team ' + str(home_team_observed_goals) + ' - Away team ' + str(away_team_observed_goals) + '\n\n<Home team wins> in ' + simulated_home_win_percent +
                  ' of simulations\n<Away team wins> in ' +
                  simulated_away_win_percent + ' of simulations\n<Match is drawn> in ' +
-                 simulated_draw_percent + ' of simulations',
+                 simulated_draw_percent + ' of simulations\nActual result observed in ' + f'{percentage_of_sims_matching_actual_score:.1%}' + ' simulations',
                  highlight_textprops=[
                      {"weight": "bold"}, {
                          "color": outcome_colours['Home win'], "weight": "bold"},
