@@ -88,7 +88,7 @@ df_grouped['percentage'] = df_grouped['proportion'].astype(
 
 df_grouped = df_grouped[['percentage']]
 
-st.header('Outcome')
+st.header('Match outcomes')
 
 st.write(df_grouped)
 
