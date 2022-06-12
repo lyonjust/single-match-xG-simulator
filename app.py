@@ -126,12 +126,7 @@ st.header('Match outcomes')
 st.write(df_grouped)
 
 plot_title = 'Home team ' + f'{sum(home_xg):.2f}' + \
-    ' xG - Away team ' + f'{sum(away_xg):.2f}' + ' xG\n'
-
-plot_title = plot_title + 'Home team wins in ' + \
-    simulated_home_win_percent + ' of simulations\n'
-plot_title = plot_title + 'Away team wins in ' + \
-    simulated_away_win_percent + ' of simulations'
+    ' xG - Away team ' + f'{sum(away_xg):.2f}' + ' xG'
 
 outcome_colours = {
     'Home win': '#4dabf7',
@@ -142,13 +137,13 @@ outcome_colours = {
 fig, ax = plt.subplots()
 
 sns.histplot(data=df_match_outcomes, x='home_margin', discrete=True,
-             stat='density', hue='match_outcome', palette=outcome_colours, ax=ax, zorder=1)
+             stat='density', hue='match_outcome', palette=outcome_colours, ax=ax, zorder=1, legend=False)
 
 ax.spines['top'].set_visible(False)
 ax.spines['right'].set_visible(False)
 ax.set_ylabel('density')
 
-title = fig_text(x=0.25, y=0.5,
+title = fig_text(x=0.05, y=1.0,
                  s='<Home team wins> in ' + simulated_home_win_percent + ' of simulations\n \
              <Away team wins> in ' + simulated_away_win_percent + ' of simulations\n',
                  highlight_textprops=[{"color": outcome_colours['Home win']},
