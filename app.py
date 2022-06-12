@@ -9,10 +9,15 @@ SEED = 0
 
 rng = np.random.default_rng(SEED)
 
+default_value_home_shots = [0.75, 0.75, 0.5, 0.4]
+default_value_away_shots = np.full(shape=20, fill_value=0.12)
+
 home_shots = st.text_input(
-    'Please enter the xG of all home team shots, separated by a comma (",")')
+    'Please enter the xG of all home team shots, separated by a comma (",")',
+    value=default_value_home_shots)
 away_shots = st.text_input(
-    'Please enter the xG of all away team shots, separated by a comma (",")')
+    'Please enter the xG of all away team shots, separated by a comma (",")',
+    value=default_value_away_shots)
 
 
 def xg_to_array(xg_string):
@@ -76,8 +81,8 @@ df_grouped = df_grouped[['proportion']]
 
 st.write(df_grouped)
 
-plot_title = 'Home team ' + str(sum(home_xg)) + \
-    ' xG - Away team ' + str(sum(away_xg)) + 'xG\n'
+plot_title = 'Home team ' + f'{sum(home_xg):.2f}' + \
+    ' xG - Away team ' + f'{sum(away_xg):.2f}' + 'xG\n'
 
 # plot_title = plot_title + 'Home team win ' +
 
