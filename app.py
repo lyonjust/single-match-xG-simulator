@@ -36,6 +36,14 @@ away_shots = st.text_input(
     value=default_value_away_shots_string)
 
 
+home_team_observed_goals = st.text_input(
+    'Home team total goals scored',
+    value=0)
+away_team_observed_goals = st.text_input(
+    'Away team total goals scored',
+    value=0)
+
+
 def xg_to_array(xg_string):
     return [float(x.strip()) for x in xg_string.split(',')]
 
@@ -98,6 +106,9 @@ df_grouped['percentage'] = df_grouped['proportion'].astype(
 
 df_grouped = df_grouped[['percentage']]
 
+simulated_home_win_percent = df_grouped.loc['Home win', 'percentage']
+simulated_away_win_percent = df_grouped.loc['Away win', 'percentage']
+
 st.header('Match outcomes')
 
 st.write(df_grouped)
@@ -105,7 +116,10 @@ st.write(df_grouped)
 plot_title = 'Home team ' + f'{sum(home_xg):.2f}' + \
     ' xG - Away team ' + f'{sum(away_xg):.2f}' + ' xG\n'
 
-# plot_title = plot_title + 'Home team win ' +
+plot_title = plot_title + 'Home team wins in ' + \
+    simulated_home_win_percent + ' of simulations\n'
+plot_title = plot_title + 'Away team wins in ' + \
+    simulated_away_win_percent + ' of simulations'
 
 fig, ax = plt.subplots()
 
