@@ -11,7 +11,9 @@ rng = np.random.default_rng(SEED)
 
 st.title('Single match xG simulator')
 
-st.caption("Please enter the xG of each team's shots in the input boxes below. xG should be separated by a comma (',')")
+
+st.header('Input')
+st.caption("Please enter the xG of each team's shots in the input boxes below. Individual xG values should be separated by a comma (',')")
 
 default_value_home_shots_string = '0.75, 0.75, 0.5, 0.4'
 default_value_away_shots_string = away_shots_xg = '0.12, ' * 19 + '0.12'
@@ -82,6 +84,8 @@ df_grouped = df_grouped.reindex(['Home win', 'Draw', 'Away win'])
 df_grouped['proportion'] = df_grouped['count'] / df_grouped['count'].sum()
 
 df_grouped = df_grouped[['proportion']]
+
+st.header('Outcome')
 
 st.write(df_grouped)
 
