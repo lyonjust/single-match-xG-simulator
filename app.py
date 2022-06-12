@@ -18,7 +18,9 @@ st.set_page_config(
 
 st.title('Single match xG simulator')
 
-st.write("Author: [Justin Lyons](https://lyonjust.github.io/)")
+st.header('Author')
+
+st.write("[Justin Lyons](https://lyonjust.github.io/)")
 
 st.header('Overview')
 
