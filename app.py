@@ -9,8 +9,8 @@ SEED = 0
 
 rng = np.random.default_rng(SEED)
 
-default_value_home_shots = [0.75, 0.75, 0.5, 0.4]
-default_value_away_shots = np.full(shape=20, fill_value=0.12)
+default_value_home_shots = str([0.75, 0.75, 0.5, 0.4])
+default_value_away_shots = str(np.full(shape=20, fill_value=0.12))
 
 home_shots = st.text_input(
     'Please enter the xG of all home team shots, separated by a comma (",")',
