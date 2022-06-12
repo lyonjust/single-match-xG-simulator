@@ -15,7 +15,7 @@ st.header('Overview')
 
 caption = 'This app takes a given number of xG values for a hypothetical home and away team in a football match.\n\n'
 caption = caption + 'It performs 10,000 random simulations of the match based on the outcome of each shot attempt\n\n'
-caption = caption + 'It then provides a summary of the percentage outcomes of the match as well as a histogram of the exact margin simulated'
+caption = caption + 'It then provides a summary of the possible match outcomes.'
 
 st.caption(caption)
 
