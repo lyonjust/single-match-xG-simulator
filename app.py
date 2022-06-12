@@ -83,7 +83,10 @@ df_grouped = df_grouped.reindex(['Home win', 'Draw', 'Away win'])
 
 df_grouped['proportion'] = df_grouped['count'] / df_grouped['count'].sum()
 
-df_grouped = df_grouped[['proportion']]
+df_grouped['percentage'] = df_grouped['proportion'].astype(
+    float).map("{:.0%}".format)
+
+df_grouped = df_grouped[['percentage']]
 
 st.header('Outcome')
 
