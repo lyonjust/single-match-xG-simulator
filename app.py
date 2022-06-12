@@ -149,6 +149,6 @@ title = fig_text(x=0.05, y=1.0,
                  highlight_textprops=[{"color": outcome_colours['Home win']},
                                       {"color": outcome_colours['Away win']}])
 
-fig.suptitle(plot_title)
+# fig.suptitle(plot_title)
 
 st.pyplot(fig=fig)
