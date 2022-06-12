@@ -126,9 +126,6 @@ st.header('Match outcomes')
 
 # st.write(df_grouped)
 
-plot_title = 'Home team ' + f'{sum(home_xg):.2f}' + \
-    ' xG - Away team ' + f'{sum(away_xg):.2f}' + ' xG'
-
 outcome_colours = {
     'Home win': '#4dabf7',
     'Draw': '#ced4da',
@@ -144,15 +141,20 @@ ax.spines['top'].set_visible(False)
 ax.spines['right'].set_visible(False)
 ax.set_ylabel('density')
 
-title = fig_text(x=0.05, y=1.0,
-                 s=plot_title + '\n\n<Home team wins> in ' + simulated_home_win_percent +
+plot_title = 'Home team ' + f'{sum(home_xg):.2f}' + \
+    ' xG - Away team ' + f'{sum(away_xg):.2f}' + ' xG'
+
+title = fig_text(x=0.05, y=1.1,
+                 s='<' + plot_title + '>' + '\n\n<Home team wins> in ' + simulated_home_win_percent +
                  ' of simulations\n<Away team wins> in ' +
                  simulated_away_win_percent + ' of simulations\n<Match is drawn> in ' +
                  simulated_draw_percent + ' of simulations',
-                 highlight_textprops=[{"color": outcome_colours['Home win'], "weight": "bold"},
-                                      {"color": outcome_colours['Away win'],
-                                          "weight": "bold"},
-                                      {"color": outcome_colours['Draw'], "weight": "bold"}])
+                 highlight_textprops=[
+                     {"weight": "bold"}, {
+                         "color": outcome_colours['Home win'], "weight": "bold"},
+                     {"color": outcome_colours['Away win'],
+                      "weight": "bold"},
+                     {"color": outcome_colours['Draw'], "weight": "bold"}])
 
 # fig.suptitle(plot_title)
 
