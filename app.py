@@ -9,6 +9,13 @@ SEED = 0
 
 rng = np.random.default_rng(SEED)
 
+st.set_page_config(
+    page_title="xG simulator",
+    page_icon="⚽",
+    #    layout="wide",
+    #    initial_sidebar_state="expanded"
+)
+
 st.title('Single match xG simulator')
 
 st.header('Overview')
@@ -18,7 +25,9 @@ caption = caption + 'It performs 10,000 random simulations of the match based on
 caption = caption + 'It then provides a summary of the possible match outcomes.\n\n'
 caption = caption + \
     'The purpose is to reinforce and improve understanding and language around xG, '
-caption = caption + 'as well as highlight the limitations of drawing absolute conclusions from just the overall aggregate single match xG comparison.'
+caption = caption + 'as well as highlight the limitations of drawing absolute conclusions from just the overall aggregate single match xG comparison.\n\n'
+
+st.write("App by [Justin Lyons](https://lyonjust.github.io/)")
 
 st.caption(caption)
 
@@ -37,10 +46,10 @@ away_shots = st.text_input(
 
 
 home_team_observed_goals = st.text_input(
-    'Home team total goals scored',
+    'Home team actual goals scored',
     value=0)
 away_team_observed_goals = st.text_input(
-    'Away team total goals scored',
+    'Away team actual goals scored',
     value=0)
 
 
