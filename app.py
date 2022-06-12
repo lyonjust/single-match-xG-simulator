@@ -3,6 +3,7 @@ import numpy as np
 import streamlit as st
 import matplotlib.pyplot as plt
 import seaborn as sns
+from highlight_text import HighlightText, ax_text, fig_text
 
 N_SIMS = 10000
 SEED = 0
@@ -28,7 +29,7 @@ caption = 'This app takes a given number of xG values for a hypothetical home an
 caption = caption + 'It performs 10,000 random simulations of the match based on the outcome of each shot attempt.\n\n'
 caption = caption + 'It then provides a summary of the possible match outcomes.\n\n'
 caption = caption + \
-    'The purpose is to reinforce and improve understanding and language around xG, '
+    'The purpose is to reinforce understanding and improve langauge around xG, '
 caption = caption + 'as well as highlight the limitations of drawing absolute conclusions from just the overall aggregate single match xG comparison.\n\n'
 
 st.caption(caption)
@@ -132,14 +133,26 @@ plot_title = plot_title + 'Home team wins in ' + \
 plot_title = plot_title + 'Away team wins in ' + \
     simulated_away_win_percent + ' of simulations'
 
+outcome_colours = {
+    'Home win': '#4dabf7',
+    'Draw': '#ced4da',
+    'Away win': '#f783ac'
+}
+
 fig, ax = plt.subplots()
 
 sns.histplot(data=df_match_outcomes, x='home_margin', discrete=True,
-             stat='density', hue='match_outcome', ax=ax, zorder=1)
+             stat='density', hue='match_outcome', palette=outcome_colours, ax=ax, zorder=1)
 
 ax.spines['top'].set_visible(False)
 ax.spines['right'].set_visible(False)
 ax.set_ylabel('density')
+
+title = fig_text(x=0.25, y=0.5,
+                 s='<Home team wins> in ' + simulated_home_win_percent + ' of simulations\n \
+             <Away team wins> in ' + simulated_away_win_percent + ' of simulations\n',
+                 highlight_textprops=[{"color": outcome_colours['Home win']},
+                                      {"color": outcome_colours['Away win']}])
 
 fig.suptitle(plot_title)
 
