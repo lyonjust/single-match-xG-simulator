@@ -9,14 +9,18 @@ SEED = 0
 
 rng = np.random.default_rng(SEED)
 
+st.title('Single match xG simulator')
+
+st.caption("Please enter the xG of each team's shots in the input boxes below. xG should be separated by a comma (',')")
+
 default_value_home_shots_string = '0.75, 0.75, 0.5, 0.4'
 default_value_away_shots_string = away_shots_xg = '0.12, ' * 19 + '0.12'
 
 home_shots = st.text_input(
-    'Please enter the xG of all home team shots, separated by a comma (",")',
+    'Home shots xG',
     value=default_value_home_shots_string)
 away_shots = st.text_input(
-    'Please enter the xG of all away team shots, separated by a comma (",")',
+    'Away shots xG',
     value=default_value_away_shots_string)
 
 
