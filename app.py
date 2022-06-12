@@ -76,6 +76,11 @@ df_grouped = df_grouped[['proportion']]
 
 st.write(df_grouped)
 
+plot_title = 'Home team ' + sum(home_xg) + \
+    ' xG - Away team ' + sum(away_xg) + 'xG\n'
+
+# plot_title = plot_title + 'Home team win ' +
+
 fig, ax = plt.subplots()
 
 sns.histplot(data=df_match_outcomes, x='home_margin', discrete=True,
@@ -84,5 +89,7 @@ sns.histplot(data=df_match_outcomes, x='home_margin', discrete=True,
 ax.spines['top'].set_visible(False)
 ax.spines['right'].set_visible(False)
 ax.set_ylabel('density')
+
+fig.suptitle(plot_title)
 
 st.pyplot(fig=fig)
