@@ -48,11 +48,11 @@ away_shots = st.text_input(
     value=default_value_away_shots_string)
 
 
-home_team_observed_goals = st.text_input(
-    'Home team actual goals scored',
+home_team_observed_goals = st.number_input(
+    'Home team actual goals scored', min_value=0, step=1,
     value=0)
-away_team_observed_goals = st.text_input(
-    'Away team actual goals scored',
+away_team_observed_goals = st.number_input(
+    'Away team actual goals scored', min_value=0, step=1,
     value=0)
 
 
@@ -106,6 +106,10 @@ choices = [
 df_match_outcomes['match_outcome'] = np.select(
     condlist=conditions, choicelist=choices, default='Draw')
 
+number_of_sims_matching_actual_score = len(df_match_outcomes[(df_match_outcomes['home_goals'] == home_team_observed_goals) & (
+    df_match_outcomes['away_goals'] == away_team_observed_goals)])
+percentage_of_sims_matching_actual_score = number_of_sims_matching_actual_score / N_SIMS
+
 df_grouped = df_match_outcomes[['match_outcome',
                                 'home_goals']].groupby('match_outcome').count()
 df_grouped.columns = ['count']
@@ -140,14 +144,14 @@ sns.histplot(data=df_match_outcomes, x='home_margin', discrete=True,
 ax.spines['top'].set_visible(False)
 ax.spines['right'].set_visible(False)
 ax.set_ylabel('Density')
-ax.set_xlabel('Goal Margin (Home less Away)')
+ax.set_xlabel('Full Time Margin (Home Team Goals - Away Team Goals)')
 
 
 plot_title = 'Home team ' + f'{sum(home_xg):.2f}' + \
     ' xG - Away team ' + f'{sum(away_xg):.2f}' + ' xG'
 
-title = fig_text(x=0.05, y=1.1,
-                 s='<' + plot_title + '>' + '\n\n<Home team wins> in ' + simulated_home_win_percent +
+title = fig_text(x=0.05, y=1.2,
+                 s='<' + plot_title + '>' + '\n\nActual outcome: Home team ' + str(home_team_observed_goals) + ' - Away team ' + str(away_team_observed_goals) + '\n\n<Home team wins> in ' + simulated_home_win_percent +
                  ' of simulations\n<Away team wins> in ' +
                  simulated_away_win_percent + ' of simulations\n<Match is drawn> in ' +
                  simulated_draw_percent + ' of simulations',
