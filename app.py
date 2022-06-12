@@ -139,7 +139,9 @@ sns.histplot(data=df_match_outcomes, x='home_margin', discrete=True,
 
 ax.spines['top'].set_visible(False)
 ax.spines['right'].set_visible(False)
-ax.set_ylabel('density')
+ax.set_ylabel('Density')
+ax.set_xlabel('Goal Margin (Home less Away)')
+
 
 plot_title = 'Home team ' + f'{sum(home_xg):.2f}' + \
     ' xG - Away team ' + f'{sum(away_xg):.2f}' + ' xG'
@@ -155,7 +157,5 @@ title = fig_text(x=0.05, y=1.1,
                      {"color": outcome_colours['Away win'],
                       "weight": "bold"},
                      {"color": outcome_colours['Draw'], "weight": "bold"}])
-
-# fig.suptitle(plot_title)
 
 st.pyplot(fig=fig)
