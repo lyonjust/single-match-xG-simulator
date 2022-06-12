@@ -11,6 +11,13 @@ rng = np.random.default_rng(SEED)
 
 st.title('Single match xG simulator')
 
+st.header('Overview')
+
+caption = 'This app takes a given number of xG values for a hypothetical home and away team in a football match.\n\n'
+caption = caption + 'It performs 10,000 random simulations of the match based on the outcome of each shot attempt\n\n'
+caption = caption + 'It then provides a summary of the percentage outcomes of the match as well as a histogram of the exact margin simulated'
+
+st.caption(caption)
 
 st.header('Input')
 st.caption("Please enter the xG of each team's shots in the input boxes below.\n\nIndividual xG values should be separated by a comma (',')")
