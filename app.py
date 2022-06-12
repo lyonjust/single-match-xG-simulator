@@ -145,9 +145,9 @@ ax.spines['right'].set_visible(False)
 ax.set_ylabel('density')
 
 title = fig_text(x=0.05, y=1.0,
-                 s='<Home team wins> in ' + simulated_home_win_percent +
+                 s=plot_title + '\n\n<Home team wins> in ' + simulated_home_win_percent +
                  ' of simulations\n<Away team wins> in ' +
-                 simulated_away_win_percent + ' of simulations\n<Draw> in ' +
+                 simulated_away_win_percent + ' of simulations\n<Match is drawn> in ' +
                  simulated_draw_percent + ' of simulations',
                  highlight_textprops=[{"color": outcome_colours['Home win'], "weight": "bold"},
                                       {"color": outcome_colours['Away win'],
