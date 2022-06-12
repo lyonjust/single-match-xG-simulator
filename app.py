@@ -120,10 +120,11 @@ df_grouped = df_grouped[['percentage']]
 
 simulated_home_win_percent = df_grouped.loc['Home win', 'percentage']
 simulated_away_win_percent = df_grouped.loc['Away win', 'percentage']
+simulated_draw_percent = df_grouped.loc['Draw', 'percentage']
 
 st.header('Match outcomes')
 
-st.write(df_grouped)
+# st.write(df_grouped)
 
 plot_title = 'Home team ' + f'{sum(home_xg):.2f}' + \
     ' xG - Away team ' + f'{sum(away_xg):.2f}' + ' xG'
@@ -146,9 +147,12 @@ ax.set_ylabel('density')
 title = fig_text(x=0.05, y=1.0,
                  s='<Home team wins> in ' + simulated_home_win_percent +
                  ' of simulations\n<Away team wins> in ' +
-                 simulated_away_win_percent + ' of simulations\n',
+                 simulated_away_win_percent + ' of simulations\n<Draw> in ' +
+                 simulated_draw_percent + ' of simulations',
                  highlight_textprops=[{"color": outcome_colours['Home win'], "weight": "bold"},
-                                      {"color": outcome_colours['Away win'], "weight": "bold"}])
+                                      {"color": outcome_colours['Away win'],
+                                          "weight": "bold"},
+                                      {"color": outcome_colours['Draw'], "weight": "bold"}])
 
 # fig.suptitle(plot_title)
 
