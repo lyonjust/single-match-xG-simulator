@@ -13,7 +13,7 @@ st.title('Single match xG simulator')
 
 
 st.header('Input')
-st.caption("Please enter the xG of each team's shots in the input boxes below. Individual xG values should be separated by a comma (',')")
+st.caption("Please enter the xG of each team's shots in the input boxes below.\n\nIndividual xG values should be separated by a comma (',')")
 
 default_value_home_shots_string = '0.75, 0.75, 0.5, 0.4'
 default_value_away_shots_string = away_shots_xg = '0.12, ' * 19 + '0.12'
