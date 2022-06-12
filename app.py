@@ -70,11 +70,19 @@ df_grouped = df_match_outcomes[['match_outcome',
 df_grouped.columns = ['count']
 df_grouped = df_grouped.reindex(['Home win', 'Draw', 'Away win'])
 
+df_grouped['proportion'] = df_grouped['count'] / df_grouped['count'].sum()
+
+df_grouped = df_grouped[['proportion']]
+
 st.write(df_grouped)
 
 fig, ax = plt.subplots()
 
 sns.histplot(data=df_match_outcomes, x='home_margin', discrete=True,
              stat='density', hue='match_outcome', ax=ax, zorder=1)
+
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
+ax.set_ylabel('density')
 
 st.pyplot(fig=fig)
