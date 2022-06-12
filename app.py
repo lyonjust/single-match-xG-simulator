@@ -18,6 +18,8 @@ st.set_page_config(
 
 st.title('Single match xG simulator')
 
+st.write("Author: [Justin Lyons](https://lyonjust.github.io/)")
+
 st.header('Overview')
 
 caption = 'This app takes a given number of xG values for a hypothetical home and away team in a football match.\n\n'
@@ -28,8 +30,6 @@ caption = caption + \
 caption = caption + 'as well as highlight the limitations of drawing absolute conclusions from just the overall aggregate single match xG comparison.\n\n'
 
 st.caption(caption)
-
-st.write("App by [Justin Lyons](https://lyonjust.github.io/)")
 
 st.header('Input')
 st.caption("Please enter the xG of each team's shots in the input boxes below.\n\nIndividual xG values should be separated by a comma (',')")
