@@ -14,11 +14,11 @@ st.title('Single match xG simulator')
 st.header('Overview')
 
 caption = 'This app takes a given number of xG values for a hypothetical home and away team in a football match.\n\n'
-caption = caption + 'It performs 10,000 random simulations of the match based on the outcome of each shot attempt\n\n'
+caption = caption + 'It performs 10,000 random simulations of the match based on the outcome of each shot attempt.\n\n'
 caption = caption + 'It then provides a summary of the possible match outcomes.'
 caption = caption + \
-    'The purpose is to reinforce and improve understanding and language around xG\n\n'
-caption = caption + 'As well as highlight the limitations of drawing absolute conclusions from just the overall aggregate single match xG comparison.'
+    'The purpose is to reinforce and improve understanding and language around xG, '
+caption = caption + 'as well as highlight the limitations of drawing absolute conclusions from just the overall aggregate single match xG comparison.'
 
 st.caption(caption)
 
