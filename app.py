@@ -29,7 +29,7 @@ caption = 'This app takes a given number of xG values for a hypothetical home an
 caption = caption + 'It performs 10,000 random simulations of the match based on the outcome of each shot attempt.\n\n'
 caption = caption + 'It then provides a summary of the possible match outcomes.\n\n'
 caption = caption + \
-    'The purpose is to reinforce understanding and improve langauge around xG, '
+    'The purpose is to reinforce understanding and improve language around xG, '
 caption = caption + 'as well as highlight the limitations of drawing absolute conclusions from just the overall aggregate single match xG comparison.\n\n'
 
 st.caption(caption)
@@ -144,10 +144,11 @@ ax.spines['right'].set_visible(False)
 ax.set_ylabel('density')
 
 title = fig_text(x=0.05, y=1.0,
-                 s='<Home team wins> in ' + simulated_home_win_percent + ' of simulations\n \
-             <Away team wins> in ' + simulated_away_win_percent + ' of simulations\n',
-                 highlight_textprops=[{"color": outcome_colours['Home win']},
-                                      {"color": outcome_colours['Away win']}])
+                 s='<Home team wins> in ' + simulated_home_win_percent +
+                 ' of simulations\n<Away team wins> in ' +
+                 simulated_away_win_percent + ' of simulations\n',
+                 highlight_textprops=[{"color": outcome_colours['Home win'], "weight": "bold"},
+                                      {"color": outcome_colours['Away win'], "weight": "bold"}])
 
 # fig.suptitle(plot_title)
 
