@@ -27,9 +27,9 @@ caption = caption + \
     'The purpose is to reinforce and improve understanding and language around xG, '
 caption = caption + 'as well as highlight the limitations of drawing absolute conclusions from just the overall aggregate single match xG comparison.\n\n'
 
-st.write("App by [Justin Lyons](https://lyonjust.github.io/)")
-
 st.caption(caption)
+
+st.write("App by [Justin Lyons](https://lyonjust.github.io/)")
 
 st.header('Input')
 st.caption("Please enter the xG of each team's shots in the input boxes below.\n\nIndividual xG values should be separated by a comma (',')")
