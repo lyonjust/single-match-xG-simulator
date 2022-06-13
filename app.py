@@ -161,7 +161,7 @@ plot_title = 'Home team ' + f'{sum(home_xg):.2f}' + \
     ' xG - Away team ' + f'{sum(away_xg):.2f}' + ' xG'
 
 title = fig_text(x=0.05, y=1.2,
-                 s='<' + plot_title + '>' + '\n\nActual outcome: Home team ' + str(home_team_observed_goals) + ' - Away team ' + str(away_team_observed_goals) + '\n\n<Home team wins> in ' + simulated_home_win_percent +
+                 s='<' + plot_title + '>' + '\n\nActual outcome: Home team ' + f'{home_team_observed_goals:.0f}' + ' - Away team ' + f'{away_team_observed_goals:.0f}' + '\n\n<Home team wins> in ' + simulated_home_win_percent +
                  ' of simulations\n<Away team wins> in ' +
                  simulated_away_win_percent + ' of simulations\n<Match is drawn> in ' +
                  simulated_draw_percent + ' of simulations\nActual result observed in ' +
@@ -172,6 +172,7 @@ title = fig_text(x=0.05, y=1.2,
                      {"color": outcome_colours['Away win'],
                       "weight": "bold"},
                      {"color": outcome_colours['Draw'], "weight": "bold"}])
+
 
 # fig.tight_layout()
 
