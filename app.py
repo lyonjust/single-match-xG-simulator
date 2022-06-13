@@ -64,7 +64,11 @@ away_team_observed_goals = st.number_input(
 
 
 def xg_to_array(xg_string):
-    return [float(x.strip()) for x in xg_string.split(',')]
+    try:
+        xg_array = [float(x.strip()) for x in xg_string.split(',')]
+    except ValueError:
+        'Possible stray comma after last input'
+    return xg_array
 
 
 home_xg = xg_to_array(home_shots)
@@ -192,7 +196,7 @@ df_possible_scores.columns = ['final_score',
 df_possible_scores['percent'] = df_possible_scores['simulations'] / N_SIMS
 
 
-fig_y_length = len(df_possible_scores) / 6
+fig_y_length = len(df_possible_scores) / 4
 
 fig, ax = plt.subplots(figsize=(5, fig_y_length))
 
