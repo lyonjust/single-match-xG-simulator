@@ -32,6 +32,9 @@ caption = caption + 'It then provides a summary of the possible match outcomes.\
 caption = caption + \
     'The purpose is to reinforce understanding and improve language around xG, '
 caption = caption + 'as well as highlight the limitations of drawing absolute conclusions from just the overall aggregate single match xG comparison.\n\n'
+caption = caption + \
+    'The default values are taken from the 2022 Champions League Final between Liverpool (the designated "home" team) and Real Madrid. xG figures are courtesy of FotMob.\n\n'
+
 
 st.caption(caption)
 
