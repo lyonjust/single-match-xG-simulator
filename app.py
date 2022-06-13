@@ -195,10 +195,10 @@ ax.spines['top'].set_visible(False)
 ax.spines['right'].set_visible(False)
 ax.spines['left'].set_visible(False)
 ax.tick_params(
-    axis='y',          # changes apply to the x-axis
-    which='both',      # both major and minor ticks are affected
-    left=False,      # ticks along the bottom edge are off
-    labelleft=False)  # labels along the bottom edge are off
+    axis='y',     # changes apply to the y-axis
+    which='both',  # both major and minor ticks are affected
+    left=False
+)
 ax.set_ylabel('Match Score\n(Home Team - Away Team)')  # , rotation=0)
 ax.set_xlabel('Percent of Simulations')
 
