@@ -5,7 +5,7 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mtick
 import seaborn as sns
-from highlight_text import HighlightText, ax_text, fig_text
+from highlight_text import fig_text
 
 mpl.rcParams['figure.dpi'] = 300
 
@@ -64,10 +64,9 @@ away_team_observed_goals = st.number_input(
 
 
 def xg_to_array(xg_string):
-    try:
-        xg_array = [float(x.strip()) for x in xg_string.split(',')]
-    except ValueError:
-        'Possible stray comma after last input'
+    trimmed_array = [x.strip() for x in xg_string.split(',')]
+    # handle case where extra trailing comma is included
+    xg_array = [float(x) for x in trimmed_array if x]
     return xg_array
 
 
