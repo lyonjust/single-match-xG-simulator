@@ -38,7 +38,7 @@ st.header('Input')
 st.caption("Please enter the xG of each team's shots in the input boxes below.\n\nIndividual xG values should be separated by a comma (',')")
 
 default_value_home_shots_string = '0.75, 0.75, 0.5, 0.4'
-default_value_away_shots_string = away_shots_xg = '0.12, ' * 19 + '0.12'
+default_value_away_shots_string = away_shots_xg = '0.9, 0.6, 0.9'
 
 home_shots = st.text_input(
     'Home shots xG',
@@ -106,6 +106,12 @@ choices = [
 df_match_outcomes['match_outcome'] = np.select(
     condlist=conditions, choicelist=choices, default='Draw')
 
+df_match_outcomes['final_score'] = df_match_outcomes['home_goals'].apply(
+    str) + ' - ' + df_match_outcomes['away_goals'].apply(str)
+
+st.write(df_match_outcomes)
+
+
 number_of_sims_matching_actual_score = len(df_match_outcomes[(df_match_outcomes['home_goals'] == home_team_observed_goals) & (
     df_match_outcomes['away_goals'] == away_team_observed_goals)])
 percentage_of_sims_matching_actual_score = number_of_sims_matching_actual_score / N_SIMS
@@ -154,7 +160,8 @@ title = fig_text(x=0.05, y=1.2,
                  s='<' + plot_title + '>' + '\n\nActual outcome: Home team ' + str(home_team_observed_goals) + ' - Away team ' + str(away_team_observed_goals) + '\n\n<Home team wins> in ' + simulated_home_win_percent +
                  ' of simulations\n<Away team wins> in ' +
                  simulated_away_win_percent + ' of simulations\n<Match is drawn> in ' +
-                 simulated_draw_percent + ' of simulations\nActual result observed in ' + f'{percentage_of_sims_matching_actual_score:.1%}' + ' simulations',
+                 simulated_draw_percent + ' of simulations\nActual result observed in ' +
+                 f'{percentage_of_sims_matching_actual_score:.1%}' + ' simulations',
                  highlight_textprops=[
                      {"weight": "bold"}, {
                          "color": outcome_colours['Home win'], "weight": "bold"},
