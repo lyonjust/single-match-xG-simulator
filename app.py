@@ -38,8 +38,8 @@ st.caption(caption)
 st.header('Input')
 st.caption("Please enter the xG of each team's shots in the input boxes below.\n\nIndividual xG values should be separated by a comma (',')")
 
-default_value_home_shots_string = '0.75, 0.75, 0.5, 0.4'
-default_value_away_shots_string = away_shots_xg = '0.9, 0.6, 0.9'
+default_value_home_shots_string = '0.29, 0.07, 0.04, 0.09, 0.05, 0.06, 0.03, 0.04, 0.13, 0.01, 0.04, 0.05, 0.1, 0.12, 0.04, 0.02, 0.13, 0.04, 0.15, 0.03, 0.05, 0.29, 0.16, 0.16'
+default_value_away_shots_string = away_shots_xg = '0.1, 0.06, 0.7, 0.06'
 
 home_shots = st.text_input(
     'Home shots xG',
@@ -128,7 +128,7 @@ df_grouped = df_grouped.reindex(['Home win', 'Draw', 'Away win'])
 df_grouped['proportion'] = df_grouped['count'] / df_grouped['count'].sum()
 
 df_grouped['percentage'] = df_grouped['proportion'].astype(
-    float).map("{:.0%}".format)
+    float).map("{:.1%}".format)
 
 df_grouped = df_grouped[['percentage']]
 
@@ -184,7 +184,7 @@ df_possible_scores.columns = ['final_score',
 df_possible_scores['percent'] = df_possible_scores['simulations'] / N_SIMS
 
 
-fig, ax = plt.subplots()
+fig, ax = plt.subplots(figsize=(8, 10))
 
 g = sns.barplot(data=df_possible_scores, y='final_score', x='percent',
                 hue='match_outcome', palette=outcome_colours, ax=ax, dodge=False)
