@@ -192,7 +192,9 @@ df_possible_scores.columns = ['final_score',
 df_possible_scores['percent'] = df_possible_scores['simulations'] / N_SIMS
 
 
-fig, ax = plt.subplots(figsize=(5, 7))
+fig_y_length = len(df_possible_scores) / 6
+
+fig, ax = plt.subplots(figsize=(5, fig_y_length))
 
 g = sns.barplot(data=df_possible_scores, y='final_score', x='percent',
                 hue='match_outcome', palette=outcome_colours, ax=ax, dodge=False)
