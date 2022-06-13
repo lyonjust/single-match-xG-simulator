@@ -172,6 +172,7 @@ title = fig_text(x=0.05, y=1.2,
                  simulated_away_win_percent + ' of simulations\n<Match is drawn> in ' +
                  simulated_draw_percent + ' of simulations\nExact scoreline observed in ' +
                  f'{percentage_of_sims_matching_actual_score:.1%}' + ' simulations',
+                 fontsize=16,
                  highlight_textprops=[
                      {"weight": "bold"}, {
                          "color": outcome_colours['Home win'], "weight": "bold"},
