@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import streamlit as st
 import matplotlib.pyplot as plt
+import matplotlib.ticker as mtick
 import seaborn as sns
 from highlight_text import HighlightText, ax_text, fig_text
 
@@ -50,10 +51,10 @@ away_shots = st.text_input(
 
 home_team_observed_goals = st.number_input(
     'Home team actual goals scored', min_value=0, step=1,
-    value=0)
+    value=2)
 away_team_observed_goals = st.number_input(
     'Away team actual goals scored', min_value=0, step=1,
-    value=0)
+    value=2)
 
 
 def xg_to_array(xg_string):
@@ -178,15 +179,19 @@ df_possible_scores = df_match_outcomes[['final_score', 'home_margin', 'home_goal
     ['final_score', 'home_margin', 'match_outcome']).count().reset_index().sort_values('home_goals', ascending=False)
 df_possible_scores.columns = ['final_score',
                               'home_margin', 'match_outcome', 'simulations']
+df_possible_scores['percent'] = df_possible_scores['simulations'] / N_SIMS
+
 
 fig, ax = plt.subplots()
 
-g = sns.barplot(data=df_possible_scores, y='final_score', x='simulations',
+g = sns.barplot(data=df_possible_scores, y='final_score', x='percent',
                 hue='match_outcome', palette=outcome_colours, ax=ax, dodge=False)
 g.legend_.remove()
+ax.xaxis.set_major_formatter(mtick.PercentFormatter(1, 0))
+
 ax.spines['top'].set_visible(False)
 ax.spines['right'].set_visible(False)
 ax.set_ylabel('Match Score (Home Team - Away Team)')
-ax.set_xlabel('Number of Simulations')
+ax.set_xlabel('Percent of Simulations')
 
 st.pyplot(fig=fig)
