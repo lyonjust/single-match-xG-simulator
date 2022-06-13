@@ -1,10 +1,13 @@
 import pandas as pd
 import numpy as np
 import streamlit as st
+import matplotlib as mpl
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mtick
 import seaborn as sns
 from highlight_text import HighlightText, ax_text, fig_text
+
+mpl.rcParams['figure.dpi'] = 300
 
 N_SIMS = 10000
 SEED = 0
