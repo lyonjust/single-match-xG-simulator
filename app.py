@@ -93,6 +93,9 @@ match_outcomes = np.vstack((home_goals, away_goals, home_margin))
 df_match_outcomes = pd.DataFrame(match_outcomes.T, columns=[
                                  'home_goals', 'away_goals', 'home_margin'])
 
+for column in ['home_goals', 'away_goals', 'home_margin']:
+    df_match_outcomes[column] = df_match_outcomes[column].astype(int)
+
 conditions = [
     df_match_outcomes['home_margin'] > 0,
     df_match_outcomes['home_margin'] < 0
@@ -168,5 +171,22 @@ title = fig_text(x=0.05, y=1.2,
                      {"color": outcome_colours['Away win'],
                       "weight": "bold"},
                      {"color": outcome_colours['Draw'], "weight": "bold"}])
+
+st.pyplot(fig=fig)
+
+df_possible_scores = df_match_outcomes[['final_score', 'home_margin', 'home_goals', 'match_outcome']].groupby(
+    ['final_score', 'home_margin', 'match_outcome']).count().reset_index().sort_values('home_goals', ascending=False)
+df_possible_scores.columns = ['final_score',
+                              'home_margin', 'match_outcome', 'simulations']
+
+fig, ax = plt.subplots()
+
+g = sns.barplot(data=df_possible_scores, y='final_score', x='simulations',
+                hue='match_outcome', palette=outcome_colours, ax=ax)
+g.legend_.remove()
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
+ax.set_ylabel('Match Score')
+ax.set_xlabel('Number of Simulations')
 
 st.pyplot(fig=fig)
