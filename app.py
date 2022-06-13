@@ -112,7 +112,7 @@ df_match_outcomes['match_outcome'] = np.select(
 df_match_outcomes['final_score'] = df_match_outcomes['home_goals'].apply(
     str) + ' - ' + df_match_outcomes['away_goals'].apply(str)
 
-st.write(df_match_outcomes)
+# st.write(df_match_outcomes)
 
 
 number_of_sims_matching_actual_score = len(df_match_outcomes[(df_match_outcomes['home_goals'] == home_team_observed_goals) & (
@@ -182,11 +182,11 @@ df_possible_scores.columns = ['final_score',
 fig, ax = plt.subplots()
 
 g = sns.barplot(data=df_possible_scores, y='final_score', x='simulations',
-                hue='match_outcome', palette=outcome_colours, ax=ax)
+                hue='match_outcome', palette=outcome_colours, ax=ax, dodge=False)
 g.legend_.remove()
 ax.spines['top'].set_visible(False)
 ax.spines['right'].set_visible(False)
-ax.set_ylabel('Match Score')
+ax.set_ylabel('Match Score (Home Team - Away Team)')
 ax.set_xlabel('Number of Simulations')
 
 st.pyplot(fig=fig)
