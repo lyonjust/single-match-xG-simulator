@@ -51,10 +51,10 @@ away_shots = st.text_input(
 
 home_team_observed_goals = st.number_input(
     'Home team actual goals scored', min_value=0, step=1,
-    value=2)
+    value=0)
 away_team_observed_goals = st.number_input(
     'Away team actual goals scored', min_value=0, step=1,
-    value=2)
+    value=1)
 
 
 def xg_to_array(xg_string):
