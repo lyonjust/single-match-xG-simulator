@@ -63,10 +63,19 @@ away_team_observed_goals = st.number_input(
     value=1)
 
 
+def StringRepresentsFloat(s):
+    try:
+        float(s)
+        return str(float(s)) == s
+    except ValueError:
+        return False
+
+
 def xg_to_array(xg_string):
     trimmed_array = [x.strip() for x in xg_string.split(',')]
     # handle case where extra trailing comma is included
-    xg_array = [float(x) for x in trimmed_array if x]
+    xg_array = [float(trimmed_x)
+                for trimmed_x in trimmed_array if StringRepresentsFloat(trimmed_x)]
     return xg_array
 
 
