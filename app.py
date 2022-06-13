@@ -166,13 +166,13 @@ ax.set_xlabel('Full Time Margin (Home Team Goals - Away Team Goals)')
 plot_title = 'Home team ' + f'{sum(home_xg):.2f}' + \
     ' xG - Away team ' + f'{sum(away_xg):.2f}' + ' xG'
 
-title = fig_text(x=0.05, y=1.2,
+title = fig_text(x=0.1, y=1.3,
                  s='<' + plot_title + '>' + '\n\nActual outcome: Home team ' + f'{home_team_observed_goals:.0f}' + ' - Away team ' + f'{away_team_observed_goals:.0f}' + '\n\n<Home team wins> in ' + simulated_home_win_percent +
                  ' of simulations\n<Away team wins> in ' +
                  simulated_away_win_percent + ' of simulations\n<Match is drawn> in ' +
                  simulated_draw_percent + ' of simulations\nExact scoreline observed in ' +
                  f'{percentage_of_sims_matching_actual_score:.1%}' + ' simulations',
-                 fontsize=16,
+                 fontsize=14,
                  highlight_textprops=[
                      {"weight": "bold"}, {
                          "color": outcome_colours['Home win'], "weight": "bold"},
