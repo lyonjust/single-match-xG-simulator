@@ -152,7 +152,7 @@ outcome_colours = {
 fig, ax = plt.subplots()
 
 sns.histplot(data=df_match_outcomes, x='home_margin', discrete=True,
-             stat='density', hue='match_outcome', palette=outcome_colours, ax=ax, zorder=1, legend=False)
+             stat='density', hue='match_outcome', palette=outcome_colours, ax=ax, zorder=1, alpha=1, legend=False)
 
 ax.spines['top'].set_visible(False)
 ax.spines['right'].set_visible(False)
@@ -167,7 +167,7 @@ title = fig_text(x=0.05, y=1.2,
                  s='<' + plot_title + '>' + '\n\nActual outcome: Home team ' + f'{home_team_observed_goals:.0f}' + ' - Away team ' + f'{away_team_observed_goals:.0f}' + '\n\n<Home team wins> in ' + simulated_home_win_percent +
                  ' of simulations\n<Away team wins> in ' +
                  simulated_away_win_percent + ' of simulations\n<Match is drawn> in ' +
-                 simulated_draw_percent + ' of simulations\nActual result observed in ' +
+                 simulated_draw_percent + ' of simulations\nExact scoreline observed in ' +
                  f'{percentage_of_sims_matching_actual_score:.1%}' + ' simulations',
                  highlight_textprops=[
                      {"weight": "bold"}, {
