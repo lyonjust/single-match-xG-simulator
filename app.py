@@ -171,7 +171,7 @@ sns.histplot(data=df_match_outcomes, x='home_margin', discrete=True,
 
 ax.spines['top'].set_visible(False)
 ax.spines['right'].set_visible(False)
-ax.set_ylabel('Density')  # , rotation=0)
+ax.set_ylabel('Percent of Simulations')  # , rotation=0)
 ax.set_xlabel('Full Time Margin (Home Team Goals - Away Team Goals)')
 
 
@@ -193,7 +193,7 @@ title = fig_text(x=0.12, y=1.3,
                      {"color": outcome_colours['Draw'], "weight": "bold"}])
 
 
-# fig.tight_layout()
+ax.yaxis.set_major_formatter(mtick.PercentFormatter(1, 0))
 
 st.pyplot(fig=fig)
 
