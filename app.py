@@ -6,9 +6,6 @@ import matplotlib.pyplot as plt
 import matplotlib.ticker as mtick
 import seaborn as sns
 from highlight_text import fig_text
-import aiohttp
-import asyncio
-from understat import Understat
 
 mpl.rcParams['figure.dpi'] = 300
 
@@ -50,15 +47,13 @@ st.caption("Please enter the xG of each team's shots in the input boxes below.\n
 default_value_home_shots_string = '0.29, 0.07, 0.04, 0.09, 0.05, 0.06, 0.03, 0.04, 0.13, 0.01, 0.04, 0.05, 0.1, 0.12, 0.04, 0.02, 0.13, 0.04, 0.15, 0.03, 0.05, 0.29, 0.16, 0.16'
 default_value_away_shots_string = away_shots_xg = '0.1, 0.06, 0.7, 0.06'
 
-understat_match_id = st.text_input(
-    'Understat match ID')
-
 home_shots = st.text_input(
     'Home shots xG',
     value=default_value_home_shots_string)
 away_shots = st.text_input(
     'Away shots xG',
     value=default_value_away_shots_string)
+
 
 home_team_observed_goals = st.number_input(
     'Home team actual goals scored', min_value=0, step=1,
@@ -67,6 +62,7 @@ away_team_observed_goals = st.number_input(
     'Away team actual goals scored', min_value=0, step=1,
     value=1)
 
+<<<<<<< HEAD
 
 async def get_shots():
     async with aiohttp.ClientSession() as session:
@@ -82,6 +78,8 @@ if understat_match_id:
 
 st.text(str(home_xg))
 
+=======
+>>>>>>> parent of 47e1672 (Testing understat)
 
 def StringRepresentsFloat(s):
     try:
