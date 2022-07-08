@@ -62,24 +62,6 @@ away_team_observed_goals = st.number_input(
     'Away team actual goals scored', min_value=0, step=1,
     value=1)
 
-<<<<<<< HEAD
-
-async def get_shots():
-    async with aiohttp.ClientSession() as session:
-        understat = Understat(session)
-        shots = await understat.get_match_shots(understat_match_id)
-    home_xg = [shot['xG'] for shot in shots['h']]
-    return home_xg
-
-
-if understat_match_id:
-    loop = asyncio.get_event_loop()
-    home_xg = loop.run_until_complete(get_shots())
-
-st.text(str(home_xg))
-
-=======
->>>>>>> parent of 47e1672 (Testing understat)
 
 def StringRepresentsFloat(s):
     try:
