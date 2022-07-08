@@ -4,3 +4,6 @@ numpy
 matplotlib
 seaborn
 highlight-text
+understat
+asyncio
+aiohttp
