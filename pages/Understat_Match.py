@@ -55,13 +55,17 @@ async def get_shots(match_id):
     home_goals_actual = shots['h'][0].get('h_goals')
     away_goals_actual = shots['h'][0].get('a_goals')
     match_date = pd.to_datetime(shots['h'][0]['date'])
+    home_shots_list = [(shot['minute'], shot['player'], float(
+        shot['xG']), shot['result']) for shot in shots['h']]
+    away_shots_list = [(shot['minute'], shot['player'], float(
+        shot['xG']), shot['result']) for shot in shots['a']]
 
-    return home_team, home_xg, home_goals_actual, away_team, away_xg, away_goals_actual, match_date
+    return home_team, home_xg, home_goals_actual, away_team, away_xg, away_goals_actual, match_date, home_shots_list, away_shots_list
 
 
 if understat_match_id:
     loop = asyncio.new_event_loop()
-    home_team, home_xg, home_goals_actual, away_team, away_xg, away_goals_actual, match_date = loop.run_until_complete(
+    home_team, home_xg, home_goals_actual, away_team, away_xg, away_goals_actual, match_date, home_shots_list, away_shots_list = loop.run_until_complete(
         get_shots(understat_match_id))
 
     xg_float_home = [float(xg) for xg in home_xg]
@@ -69,6 +73,12 @@ if understat_match_id:
 
     total_home_xg = sum(xg_float_home)
     total_away_xg = sum(xg_float_away)
+
+    columns = ['Minute', 'Player', 'xG', 'Outcome']
+    df_home_shots = pd.DataFrame(home_shots_list, columns=columns)
+    df_away_shots = pd.DataFrame(away_shots_list, columns=columns)
+    # for df in [df_home_shots, df_away_shots]:
+    #     df['xG'] = df['xG'].round(decimals=2)
 
     home_goals = simulate.simulate_chances(rng, N_SIMS, xg_float_home)
     away_goals = simulate.simulate_chances(rng, N_SIMS, xg_float_away)
@@ -80,15 +90,17 @@ if understat_match_id:
     simulated_home_win_percent, simulated_away_win_percent, simulated_draw_percent, percentage_of_sims_matching_actual_score = simulate.get_sims_matching_score(
         df_match_outcomes, int(home_goals_actual), int(away_goals_actual))
 
-    st.header('xG of each shot')
+    st.header('Shot details')
 
     st.subheader(home_team + ' (home)')
 
-    st.write(home_xg)
+    # st.write(home_xg)
+    st.dataframe(df_home_shots)
 
     st.subheader(away_team + ' (away)')
 
-    st.write(away_xg)
+    # st.write(away_xg)
+    st.dataframe(df_away_shots)
 
     st.header('Match outcomes')
 
