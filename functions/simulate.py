@@ -17,22 +17,6 @@ outcome_colours = {
 }
 
 
-def caption(understat=False):
-    caption = 'This app takes a given number of xG values for a football match and performs 10,000 random simulations of the match based on the outcome of each shot attempt.\n\n'
-    caption = caption + 'It then provides a summary of the possible match outcomes.\n\n'
-    caption = caption + \
-        'The purpose is to reinforce understanding and improve language around xG, '
-    caption = caption + 'as well as highlight the limitations of drawing absolute conclusions from just the overall aggregate single match xG comparison.\n\n'
-
-    if understat:
-        caption = caption + 'This page grabs xG data from Understat via a match ID, e.g. "16669". Match IDs are found from the last part of the Understat match details URL: understat.com/match/<match_id>'
-    else:
-        caption = caption + "This page allows you to enter any sequence of custom xG values for a hypothetical home and away team."
-        caption = caption + \
-            '\n\nThe default values are taken from the 2022 Champions League Final between Liverpool (the designated "home" team) and Real Madrid. xG figures are courtesy of FotMob.\n\n'
-    return caption
-
-
 def simulate_chances(rng, number_of_sims, xg_of_chances):
     '''
     Simulates goals scored given a list of xG chances
