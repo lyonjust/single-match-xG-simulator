@@ -11,9 +11,9 @@ SEED = 0
 rng = np.random.default_rng(SEED)
 
 outcome_colours = {
-    'Home win': '#4dabf7',
-    'Draw': '#ced4da',
-    'Away win': '#f783ac'
+    'Home win': '#1c7ed6',
+    'Draw': '#495057',
+    'Away win': '#d6336c'
 }
 
 
@@ -158,7 +158,7 @@ def plot_exact_scores(df_match_outcomes):
     fig, ax = plt.subplots(figsize=(5, fig_y_length))
 
     g = sns.barplot(data=df_possible_scores, y='final_score', x='percent',
-                    hue='match_outcome', palette=outcome_colours, ax=ax, dodge=False)
+                    hue='match_outcome', palette=outcome_colours, ax=ax, dodge=False, alpha=1)
     g.legend_.remove()
     ax.xaxis.set_major_formatter(mtick.PercentFormatter(1, 0))
 

@@ -15,12 +15,9 @@ rng = np.random.default_rng(SEED)
 
 mpl.rcParams['figure.dpi'] = 300
 
-
 st.set_page_config(
     page_title="xG simulator",
-    page_icon="⚽",
-    #    layout="wide",
-    #    initial_sidebar_state="expanded"
+    page_icon="⚽"
 )
 
 st.title('Single match xG simulator')
@@ -39,7 +36,7 @@ caption = caption + 'as well as highlight the limitations of drawing absolute co
 caption = caption + 'If you choose a "custom match", you can enter any sequence of custom xG values for a hypothetical home and away team, as well as a hypothetical match result.\n\n'
 caption = caption + \
     'If you choose an "Understat match ID", you can enter a valid match ID for Understat (e.g. "16669") and the app will perform the simulation based on the shot details Understat recorded for this match.\n'
-caption = caption + '\nMatch IDs are found from the last part of the Understat match details URL: understat.com/match/<match_id>'
+caption = caption + '\nUnderstat match IDs are found from the last part of the match details URL: understat.com/match/<match_id>'
 
 st.caption(caption)
 
@@ -151,12 +148,10 @@ else:
 
         st.subheader(home_team + ' (home)')
 
-        # st.write(home_xg)
         st.dataframe(df_home_shots)
 
         st.subheader(away_team + ' (away)')
 
-        # st.write(away_xg)
         st.dataframe(df_away_shots)
 
         st.header('Match outcomes')
