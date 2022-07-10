@@ -80,6 +80,16 @@ if understat_match_id:
     simulated_home_win_percent, simulated_away_win_percent, simulated_draw_percent, percentage_of_sims_matching_actual_score = simulate.get_sims_matching_score(
         df_match_outcomes, int(home_goals_actual), int(away_goals_actual))
 
+    st.header('xG of each shot')
+
+    st.subheader(home_team + ' (home)')
+
+    st.write(home_xg)
+
+    st.subheader(away_team + ' (away)')
+
+    st.write(away_xg)
+
     st.header('Match outcomes')
 
     fig, ax = simulate.plot_margins(df_match_outcomes, int(home_goals_actual), int(away_goals_actual), simulated_home_win_percent,

@@ -139,7 +139,7 @@ def plot_margins(df_match_outcomes, home_team_observed_goals, away_team_observed
         ' xG - ' + away_team + ' (away) ' + f'{total_away_xg:.2f}' + ' xG'
 
     if match_date:
-        date_str = '\n' + f'{match_date:%d %B %Y}' + '\n'
+        date_str = '\n' + f'{match_date:%#d %B %Y}' + '\n'
     else:
         date_str = '\n'
 
