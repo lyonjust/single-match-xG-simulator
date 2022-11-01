@@ -36,8 +36,9 @@ caption = caption + \
 caption = caption + 'as well as highlight the limitations of drawing absolute conclusions from just the overall aggregate single match xG comparison.\n\n'
 caption = caption + 'If you choose a "custom match", you can enter any sequence of custom xG values for a hypothetical home and away team, as well as a hypothetical match result.\n\n'
 caption = caption + \
-    'If you choose an "Understat match ID", you can enter a valid match ID for Understat (e.g. "16669") and the app will perform the simulation based on the shot details Understat recorded for this match.\n'
+    'If you choose an "Understat match ID" or "FotMob match ID", you can enter a valid match ID from Understat (e.g. "16669") or FotMob (e.g. "3978853") and the app will perform the simulation based on the shot details recorded for this match.\n'
 caption = caption + '\nUnderstat match IDs are found from the last part of the match details URL: understat.com/match/<match_id>'
+caption = caption + '\nFotMob match IDs are found from the digits after the "match" part of the match details URL: fotmob.com/match/<match_id>/matchfacts/<home_team>-vs-<away_team>'
 
 st.caption(caption)
 
