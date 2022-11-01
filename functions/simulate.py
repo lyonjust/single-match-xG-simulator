@@ -5,7 +5,7 @@ import matplotlib.ticker as mtick
 import seaborn as sns
 from highlight_text import fig_text
 
-N_SIMS = 10000
+N_SIMS = 100000
 SEED = 0
 
 rng = np.random.default_rng(SEED)

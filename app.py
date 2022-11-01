@@ -9,7 +9,7 @@ import requests
 
 from functions import simulate
 
-N_SIMS = 10000
+N_SIMS = 100000
 SEED = 0
 
 rng = np.random.default_rng(SEED)
@@ -29,7 +29,7 @@ st.write("[Justin Lyons](https://lyonjust.github.io/)")
 
 st.header('Overview')
 
-caption = 'This app takes a given number of xG values for a football match and performs 10,000 random simulations of the match based on the outcome of each shot attempt.\n\n'
+caption = 'This app takes a given number of xG values for a football match and performs 100,000 random simulations of the match based on the outcome of each shot attempt.\n\n'
 caption = caption + 'It then provides a summary of the possible match outcomes.\n\n'
 caption = caption + \
     'The purpose is to reinforce understanding and improve language around xG, '
