@@ -205,7 +205,7 @@ else:  # fotmob
         columns = ['Minute', 'Player', 'xG', 'Outcome']
 
         df_home_shots = pd.DataFrame(home_shots_list, columns=columns)
-        df_away_shots = pd.DataFrame(home_shots_list, columns=columns)
+        df_away_shots = pd.DataFrame(away_shots_list, columns=columns)
 
         total_home_xg = df_home_shots['xG'].sum()
         total_away_xg = df_away_shots['xG'].sum()
