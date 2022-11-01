@@ -41,13 +41,13 @@ caption = caption + '\nUnderstat match IDs are found from the last part of the m
 
 st.caption(caption)
 
-custom_or_understat _or_fotmob = st.radio(
+custom_or_understat_or_fotmob = st.radio(
     "Simulate a...",
     ('Custom match', 'Understat match ID', 'FotMob match ID'))
 
 st.header('Input')
 
-if custom_or_understat _or_fotmob == 'Custom match':
+if custom_or_understat_or_fotmob == 'Custom match':
 
     st.caption("Please enter the xG of each team's shots in the input boxes below.\n\nIndividual xG values should be separated by a comma (',')")
 
@@ -92,7 +92,7 @@ if custom_or_understat _or_fotmob == 'Custom match':
 
     st.pyplot(fig=fig)
 
-elif custom_or_understat _or_fotmob == 'Understat match ID':
+elif custom_or_understat_or_fotmob == 'Understat match ID':
     st.caption("Please enter the match ID of an Understat match, e.g. 16669")
 
     understat_match_id = st.text_input(
