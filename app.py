@@ -183,6 +183,8 @@ else:  # fotmob
 
         match_summary = requests.get(url_complete).json()
         shot_summary = match_summary['content']['shotmap']['shots']
+        shot_summary_no_shootout = [
+            shot for shot in shot_summary if shot['period'] != 'PenaltyShootout']
 
         match_date = pd.to_datetime(
             match_summary['general']['matchTimeUTCDate'])
@@ -199,9 +201,9 @@ else:  # fotmob
                              ['teams'] if team['id'] == away_team_id][0]
 
         home_shots_list = [[shot['min'], shot['playerName'], shot['expectedGoals'],
-                            shot['eventType']] for shot in shot_summary if shot['teamId'] == home_team_id]
+                            shot['eventType']] for shot in shot_summary_no_shootout if shot['teamId'] == home_team_id]
         away_shots_list = [[shot['min'], shot['playerName'], shot['expectedGoals'],
-                            shot['eventType']] for shot in shot_summary if shot['teamId'] == away_team_id]
+                            shot['eventType']] for shot in shot_summary_no_shootout if shot['teamId'] == away_team_id]
 
         columns = ['Minute', 'Player', 'xG', 'Outcome']
 
