@@ -29,14 +29,15 @@ st.write('App built by [Justin Lyons](https://lyonjust.github.io/)')
 
 # st.header('Overview')
 
-caption = 'This app takes a given number of xG values for a football match and performs 100,000 random simulations of the match based on the outcome of each shot attempt.\n\n'
+caption = 'This app takes a given number of xG values for a football match and performs ' + \
+    f'{N_SIMS:,}' + ' random simulations of the match based on the outcome of each shot attempt.\n\n'
 caption = caption + 'It then provides a summary of the possible match outcomes.\n\n'
 caption = caption + \
     'The purpose is to reinforce understanding and improve language around xG, '
 caption = caption + 'as well as highlight the limitations of drawing absolute conclusions from just the overall aggregate single match xG comparison.\n\n'
 caption = caption + 'If you choose a "custom match", you can enter any sequence of custom xG values for a hypothetical home and away team, as well as a hypothetical match result.\n\n'
 caption = caption + \
-    'If you choose an "Understat match ID" or "FotMob match ID", you can enter a valid match ID from Understat (e.g. "16669") or FotMob (e.g. "3978853") and the app will perform the simulation based on the shot details recorded for this match.\n'
+    'If you choose an "Understat match ID" or "FotMob match ID", you can enter a valid match ID from Understat (e.g. "16669") or FotMob (e.g. "3854572") and the app will perform the simulation based on the shot details recorded for this match.\n'
 caption = caption + '\nUnderstat match IDs are found from the last part of the match details URL: understat.com/match/<match_id>\n'
 caption = caption + '\nFotMob match IDs are found from the digits after the "match" part of the match details URL: fotmob.com/match/<match_id>/matchfacts/<home_team>-vs-<away_team>'
 
@@ -171,7 +172,7 @@ elif custom_or_understat_or_fotmob == 'Understat match ID':
         st.pyplot(fig=fig)
 
 else:  # fotmob
-    st.caption("Please enter the match ID of an FotMob match, e.g. 3978853")
+    st.caption("Please enter the match ID of an FotMob match, e.g. 3854572")
 
     fotmob_match_id = st.text_input(
         'FotMob match ID')
