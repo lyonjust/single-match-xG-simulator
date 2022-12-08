@@ -179,12 +179,19 @@ else:  # fotmob
     url_match_details = 'matchDetails?matchId='
 
     if fotmob_match_id:
+
+        exclude_penalties = st.checkbox('Exclude penalties', value=False)
+
         url_complete = url_base + url_match_details + fotmob_match_id
 
         match_summary = requests.get(url_complete).json()
         shot_summary = match_summary['content']['shotmap']['shots']
         shot_summary_no_shootout = [
             shot for shot in shot_summary if shot['period'] != 'PenaltyShootout']
+
+        if exclude_penalties:
+            shot_summary_no_shootout = [
+                shot for shot in shot_summary_no_shootout if shot['situation'] != 'Penalty']
 
         match_date = pd.to_datetime(
             match_summary['general']['matchTimeUTCDate'])
