@@ -27,7 +27,7 @@ st.header('Author')
 
 st.write("[Justin Lyons](https://lyonjust.github.io/)")
 
-st.header('Overview')
+# st.header('Overview')
 
 caption = 'This app takes a given number of xG values for a football match and performs 100,000 random simulations of the match based on the outcome of each shot attempt.\n\n'
 caption = caption + 'It then provides a summary of the possible match outcomes.\n\n'
@@ -40,7 +40,10 @@ caption = caption + \
 caption = caption + '\nUnderstat match IDs are found from the last part of the match details URL: understat.com/match/<match_id>\n'
 caption = caption + '\nFotMob match IDs are found from the digits after the "match" part of the match details URL: fotmob.com/match/<match_id>/matchfacts/<home_team>-vs-<away_team>'
 
-st.caption(caption)
+# st.caption(caption)
+
+with st.expander('Overview'):
+    st.write(caption)
 
 custom_or_understat_or_fotmob = st.radio(
     "Simulate a...",
