@@ -200,20 +200,18 @@ else:  # fotmob
         away_goals_actual = [team['score'] for team in match_summary['header']
                              ['teams'] if team['id'] == away_team_id][0]
 
-        home_shots_list = [[shot['min'], shot['playerName'], shot['expectedGoals'],
+        home_shots_list = [[shot['min'], shot['playerName'], shot['situation'], shot['expectedGoals'],
                             shot['eventType']] for shot in shot_summary_no_shootout if shot['teamId'] == home_team_id]
-        away_shots_list = [[shot['min'], shot['playerName'], shot['expectedGoals'],
+        away_shots_list = [[shot['min'], shot['playerName'], shot['situation'], shot['expectedGoals'],
                             shot['eventType']] for shot in shot_summary_no_shootout if shot['teamId'] == away_team_id]
 
-        columns = ['Minute', 'Player', 'xG', 'Outcome']
+        columns = ['Minute', 'Player', 'Situation', 'xG', 'Outcome']
 
         df_home_shots = pd.DataFrame(home_shots_list, columns=columns)
         df_away_shots = pd.DataFrame(away_shots_list, columns=columns)
 
         total_home_xg = df_home_shots['xG'].sum()
         total_away_xg = df_away_shots['xG'].sum()
-
-        columns = ['Minute', 'Player', 'xG', 'Outcome']
 
         home_goals = simulate.simulate_chances(
             rng, N_SIMS, df_home_shots['xG'])
