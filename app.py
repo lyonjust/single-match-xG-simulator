@@ -23,9 +23,9 @@ st.set_page_config(
 
 st.title('Single match xG simulator')
 
-st.header('Author')
+# st.header('Author')
 
-st.write("[Justin Lyons](https://lyonjust.github.io/)")
+st.write('App built by [Justin Lyons](https://lyonjust.github.io/)')
 
 # st.header('Overview')
 
@@ -42,7 +42,7 @@ caption = caption + '\nFotMob match IDs are found from the digits after the "mat
 
 # st.caption(caption)
 
-with st.expander('Overview'):
+with st.expander('Click here for an explanation of how and why to use this app'):
     st.write(caption)
 
 custom_or_understat_or_fotmob = st.radio(
