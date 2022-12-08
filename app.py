@@ -103,7 +103,7 @@ if custom_or_understat_or_fotmob == 'Custom match':
 
 elif custom_or_understat_or_fotmob == 'Understat match ID':
     understat_caption = 'Please enter the match ID of an Understat match, e.g. 16669'
-    understat_caption = understat_caption + understat_helper
+    understat_caption = understat_caption + '\n\n' + understat_helper
     st.caption(understat_caption)
 
     understat_match_id = st.text_input(
@@ -180,7 +180,7 @@ elif custom_or_understat_or_fotmob == 'Understat match ID':
 else:  # fotmob
 
     fotmob_caption = 'Please enter the match ID of an FotMob match, e.g. 3854572'
-    fotmob_caption = fotmob_caption + fotmob_helper
+    fotmob_caption = fotmob_caption + '\n\n' + fotmob_helper
     st.caption(fotmob_caption)
 
     fotmob_match_id = st.text_input(
