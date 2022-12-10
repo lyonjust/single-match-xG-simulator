@@ -206,6 +206,17 @@ else:  # fotmob
             shot_summary_no_shootout = [
                 shot for shot in shot_summary_no_shootout if shot['situation'] != 'Penalty']
 
+        shots_in_extra_time = [shot for shot in shot_summary if shot['period'] in [
+            'FirstHalfExtra', 'SecondHalfExtra']]
+
+        if shots_in_extra_time:
+            simulate_result_90_mins_only = st.checkbox(
+                'Simulate result at 90 minutes', value=False)
+
+        if simulate_result_90_mins_only:
+            shots_final = [shot for shot in shot_summary_no_shootout if shot['period'] in [
+                'FirstHalf', 'SecondHalf']]
+
         match_date = pd.to_datetime(
             match_summary['general']['matchTimeUTCDate'])
 
@@ -221,9 +232,9 @@ else:  # fotmob
                              ['teams'] if team['id'] == away_team_id][0]
 
         home_shots_list = [[shot['min'], shot['playerName'], shot['situation'], shot['expectedGoals'],
-                            shot['eventType']] for shot in shot_summary_no_shootout if shot['teamId'] == home_team_id]
+                            shot['eventType']] for shot in shots_final if shot['teamId'] == home_team_id]
         away_shots_list = [[shot['min'], shot['playerName'], shot['situation'], shot['expectedGoals'],
-                            shot['eventType']] for shot in shot_summary_no_shootout if shot['teamId'] == away_team_id]
+                            shot['eventType']] for shot in shots_final if shot['teamId'] == away_team_id]
 
         columns = ['Minute', 'Player', 'Situation', 'xG', 'Outcome']
 
