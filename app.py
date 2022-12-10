@@ -40,8 +40,8 @@ caption = caption + \
     'If you choose an **Understat match ID** or **FotMob match ID**, you can enter a valid match ID from Understat (e.g. "16669") or FotMob (e.g. "3854572") and the app will perform the simulation based on the shot details recorded for this match. Penalty shootouts are excluded from these analyses.\n'
 
 
-understat_helper = '\nUnderstat match IDs are found from the last part of the match details URL: understat.com/match/<match_id>\n'
-fotmob_helper = '\nFotMob match IDs are found from the digits after the "match" part of the match details URL: fotmob.com/match/<match_id>/matchfacts/<home_team>-vs-<away_team>'
+understat_helper = '\nUnderstat match IDs are found from the last part of the match details URL: understat.com/match/***<match_id>***\n'
+fotmob_helper = '\nFotMob match IDs are found from the digits after the "match" part of the match details URL: fotmob.com/match/***<match_id>***/matchfacts/<home_team>-vs-<away_team>'
 caption = caption + understat_helper
 caption = caption + fotmob_helper
 
