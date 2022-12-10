@@ -216,6 +216,8 @@ else:  # fotmob
         if simulate_result_90_mins_only:
             shots_final = [shot for shot in shot_summary_no_shootout if shot['period'] in [
                 'FirstHalf', 'SecondHalf']]
+        else:
+            shots_final = shot_summary_no_shootout
 
         match_date = pd.to_datetime(
             match_summary['general']['matchTimeUTCDate'])
