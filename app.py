@@ -203,6 +203,7 @@ else:  # fotmob
         shots_in_extra_time = [shot for shot in shot_summary if shot['period'] in [
             'FirstHalfExtra', 'SecondHalfExtra']]
 
+        simulate_result_90_mins_only = False
         if shots_in_extra_time:
             simulate_result_90_mins_only = st.checkbox(
                 'Simulate result at end of 90 minutes (i.e. ignore extra time)', value=False)
@@ -214,6 +215,7 @@ else:  # fotmob
         penalties_not_in_shootout = [
             shot for shot in shot_summary if shot['situation'] == 'Penalty' and shot['period'] != 'PenaltyShootout']
 
+        exclude_penalties = False
         if penalties_not_in_shootout:
             exclude_penalties = st.checkbox(
                 'Exclude penalties awarded (i.e. simulate NPxG)', value=False)
