@@ -205,7 +205,7 @@ else:  # fotmob
 
         if shots_in_extra_time:
             simulate_result_90_mins_only = st.checkbox(
-                'Simulate result at 90 minutes', value=False)
+                'Simulate result at end of 90 minutes (i.e. ignore extra time)', value=False)
 
         if simulate_result_90_mins_only:
             shot_summary_no_shootout = [shot for shot in shot_summary_no_shootout if shot['period'] in [
