@@ -193,18 +193,12 @@ else:  # fotmob
 
     if fotmob_match_id:
 
-        exclude_penalties = st.checkbox('Exclude penalties', value=False)
-
         url_complete = url_base + url_match_details + fotmob_match_id
 
         match_summary = requests.get(url_complete).json()
         shot_summary = match_summary['content']['shotmap']['shots']
         shot_summary_no_shootout = [
             shot for shot in shot_summary if shot['period'] != 'PenaltyShootout']
-
-        if exclude_penalties:
-            shot_summary_no_shootout = [
-                shot for shot in shot_summary_no_shootout if shot['situation'] != 'Penalty']
 
         shots_in_extra_time = [shot for shot in shot_summary if shot['period'] in [
             'FirstHalfExtra', 'SecondHalfExtra']]
@@ -214,10 +208,19 @@ else:  # fotmob
                 'Simulate result at 90 minutes', value=False)
 
         if simulate_result_90_mins_only:
-            shots_final = [shot for shot in shot_summary_no_shootout if shot['period'] in [
+            shot_summary_no_shootout = [shot for shot in shot_summary_no_shootout if shot['period'] in [
                 'FirstHalf', 'SecondHalf']]
-        else:
-            shots_final = shot_summary_no_shootout
+
+        penalties_not_in_shootout = [
+            shot for shot in shot_summary if shot['situation'] == 'Penalty' and shot['period'] != 'PenaltyShootout']
+
+        if penalties_not_in_shootout:
+            exclude_penalties = st.checkbox(
+                'Exclude penalties awarded in regular time (i.e. simulate NPxG)', value=False)
+
+        if exclude_penalties:
+            shot_summary_no_shootout = [
+                shot for shot in shot_summary_no_shootout if shot['situation'] != 'Penalty']
 
         match_date = pd.to_datetime(
             match_summary['general']['matchTimeUTCDate'])
@@ -234,9 +237,9 @@ else:  # fotmob
                              ['teams'] if team['id'] == away_team_id][0]
 
         home_shots_list = [[shot['min'], shot['playerName'], shot['situation'], shot['expectedGoals'],
-                            shot['eventType']] for shot in shots_final if shot['teamId'] == home_team_id]
+                            shot['eventType']] for shot in shot_summary_no_shootout if shot['teamId'] == home_team_id]
         away_shots_list = [[shot['min'], shot['playerName'], shot['situation'], shot['expectedGoals'],
-                            shot['eventType']] for shot in shots_final if shot['teamId'] == away_team_id]
+                            shot['eventType']] for shot in shot_summary_no_shootout if shot['teamId'] == away_team_id]
 
         columns = ['Minute', 'Player', 'Situation', 'xG', 'Outcome']
 
