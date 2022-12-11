@@ -127,13 +127,13 @@ def plot_margins(df_match_outcomes, home_team_observed_goals, away_team_observed
     else:
         date_str = '\n'
 
-    title = fig_text(x=0.12, y=1.3,
+    title = fig_text(x=0.12, y=1.5,
                      s='<' + plot_title + '>' + date_str + '\n\nActual outcome: ' + home_team + ' ' + f'{home_team_observed_goals:.0f}' + ' - ' + away_team + ' ' + f'{away_team_observed_goals:.0f}' + '\n\n<Home team wins> in ' + simulated_home_win_percent +
                      ' of simulations\n<Away team wins> in ' +
                      simulated_away_win_percent + ' of simulations\n<Match is drawn> in ' +
                      simulated_draw_percent + ' of simulations\nExact scoreline observed in ' +
                      f'{percentage_of_sims_matching_actual_score:.1%}' +
-                     ' simulations' + extra_plot_comment,
+                     ' simulations\n\n' + extra_plot_comment,
                      fontsize=14,
                      highlight_textprops=[
                          {"weight": "bold"}, {

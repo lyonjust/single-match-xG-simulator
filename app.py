@@ -214,7 +214,7 @@ else:  # fotmob
             shot_summary_no_shootout = [shot for shot in shot_summary_no_shootout if shot['period'] in [
                 'FirstHalf', 'SecondHalf']]
 
-            extra_plot_comment += '\nResult simulated to end of 90 minutes regulation time'
+            extra_plot_comment += 'Result simulated to end of 90 minutes regulation time'
 
         penalties_not_in_shootout = [
             shot for shot in shot_summary if shot['situation'] == 'Penalty' and shot['period'] != 'PenaltyShootout']
@@ -228,7 +228,7 @@ else:  # fotmob
             shot_summary_no_shootout = [
                 shot for shot in shot_summary_no_shootout if shot['situation'] != 'Penalty']
 
-            extra_plot_comment += '\nNon Penalty xG only'
+            extra_plot_comment += 'Simulations based on non-penalty xG  (NPxG) only'
 
         match_date = pd.to_datetime(
             match_summary['general']['matchTimeUTCDate'])
