@@ -106,7 +106,7 @@ def get_sims_matching_score(df_match_outcomes, home_team_observed_goals, away_te
     return simulated_home_win_percent, simulated_away_win_percent, simulated_draw_percent, percentage_of_sims_matching_actual_score
 
 
-def plot_margins(df_match_outcomes, home_team_observed_goals, away_team_observed_goals, simulated_home_win_percent, simulated_draw_percent, simulated_away_win_percent, percentage_of_sims_matching_actual_score, total_home_xg, total_away_xg, match_date=None, home_team='Home team', away_team='Away team', extra_plot_comment=None):
+def plot_margins(df_match_outcomes, home_team_observed_goals, away_team_observed_goals, simulated_home_win_percent, simulated_draw_percent, simulated_away_win_percent, percentage_of_sims_matching_actual_score, total_home_xg, total_away_xg, match_date=None, home_team='Home team', away_team='Away team', extra_plot_comment=''):
     fig, ax = plt.subplots()
 
     sns.histplot(data=df_match_outcomes, x='home_margin', discrete=True,
@@ -122,9 +122,6 @@ def plot_margins(df_match_outcomes, home_team_observed_goals, away_team_observed
     plot_title = home_team + ' (home) ' + f'{total_home_xg:.2f}' + \
         ' xG - ' + away_team + ' (away) ' + f'{total_away_xg:.2f}' + ' xG'
 
-    if extra_plot_comment:
-        plot_title += extra_plot_comment
-
     if match_date:
         date_str = '\n' + f'{match_date:%d %B %Y}' + '\n'
     else:
@@ -136,7 +133,7 @@ def plot_margins(df_match_outcomes, home_team_observed_goals, away_team_observed
                      simulated_away_win_percent + ' of simulations\n<Match is drawn> in ' +
                      simulated_draw_percent + ' of simulations\nExact scoreline observed in ' +
                      f'{percentage_of_sims_matching_actual_score:.1%}' +
-                     ' simulations',
+                     ' simulations' + extra_plot_comment,
                      fontsize=14,
                      highlight_textprops=[
                          {"weight": "bold"}, {
