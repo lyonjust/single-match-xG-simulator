@@ -203,6 +203,8 @@ else:  # fotmob
         shots_in_extra_time = [shot for shot in shot_summary if shot['period'] in [
             'FirstHalfExtra', 'SecondHalfExtra']]
 
+        extra_plot_comment = ''
+
         simulate_result_90_mins_only = False
         if shots_in_extra_time:
             simulate_result_90_mins_only = st.checkbox(
@@ -211,6 +213,8 @@ else:  # fotmob
         if simulate_result_90_mins_only:
             shot_summary_no_shootout = [shot for shot in shot_summary_no_shootout if shot['period'] in [
                 'FirstHalf', 'SecondHalf']]
+
+            extra_plot_comment += '\nResult simulated to end of 90 minutes regulation time'
 
         penalties_not_in_shootout = [
             shot for shot in shot_summary if shot['situation'] == 'Penalty' and shot['period'] != 'PenaltyShootout']
@@ -223,6 +227,8 @@ else:  # fotmob
         if exclude_penalties:
             shot_summary_no_shootout = [
                 shot for shot in shot_summary_no_shootout if shot['situation'] != 'Penalty']
+
+            extra_plot_comment += '\nNon Penalty xG only'
 
         match_date = pd.to_datetime(
             match_summary['general']['matchTimeUTCDate'])
@@ -276,7 +282,7 @@ else:  # fotmob
         st.header('Match outcomes')
 
         fig, ax = simulate.plot_margins(df_match_outcomes, int(home_goals_actual), int(away_goals_actual), simulated_home_win_percent,
-                                        simulated_draw_percent, simulated_away_win_percent, percentage_of_sims_matching_actual_score, total_home_xg, total_away_xg, match_date=match_date, home_team=home_team_name, away_team=away_team_name)
+                                        simulated_draw_percent, simulated_away_win_percent, percentage_of_sims_matching_actual_score, total_home_xg, total_away_xg, match_date=match_date, home_team=home_team_name, away_team=away_team_name, extra_plot_comment=extra_plot_comment)
 
         st.pyplot(fig=fig)
 
