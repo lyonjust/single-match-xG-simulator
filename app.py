@@ -25,7 +25,7 @@ st.title('Single match xG simulator')
 
 # st.header('Author')
 
-st.write('App built by [Justin Lyons](https://lyonjust.github.io/)')
+st.write('App built by [Justin Lyons](https://github.com/lyonjust)')
 
 # st.header('Overview')
 
