@@ -99,7 +99,7 @@ else:  # fotmob
     fotmob_match_id = st.text_input(
         'FotMob match ID')
 
-    # cater for matches/teams with no shots?
+    # cater for teams with no shots?
 
     url_base = 'https://www.fotmob.com/api/'
     url_match_details = 'matchDetails?matchId='
