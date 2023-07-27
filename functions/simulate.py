@@ -107,12 +107,13 @@ def get_sims_matching_score(df_match_outcomes, home_team_observed_goals, away_te
 
 
 def plot_margins(df_match_outcomes, home_team_observed_goals, away_team_observed_goals, simulated_home_win_percent, simulated_draw_percent, simulated_away_win_percent, percentage_of_sims_matching_actual_score, total_home_xg, total_away_xg, match_date=None, home_team='Home team', away_team='Away team', extra_plot_comment='', io=None):
-    fig, ax = plt.subplots(nrows=2, figsize=(8,7), height_ratios=[1,3])
+    fig, ax = plt.subplots(nrows=3, figsize=(8, 8), height_ratios=[4, 9, 1])
 
     sns.histplot(data=df_match_outcomes, x='home_margin', discrete=True,
                  stat='density', hue='match_outcome', palette=outcome_colours, ax=ax[1], zorder=1, alpha=1, legend=False)
 
     ax[0].set_axis_off()
+    ax[2].set_axis_off()
     
     ax[1].spines['top'].set_visible(False)
     ax[1].spines['right'].set_visible(False)
@@ -143,6 +144,8 @@ def plot_margins(df_match_outcomes, home_team_observed_goals, away_team_observed
                          {"color": outcome_colours['Away win'],
                              "weight": "bold"},
                          {"color": outcome_colours['Draw'], "weight": "bold"}])
+    
+    ax[2].text(x=0.5, y=0, s='https://single-match-xg-simulator.streamlit.app', horizontalalignment='center', fontstyle='italic')
        
     fig.tight_layout()
 
