@@ -8,6 +8,10 @@ import io
 
 from functions import simulate
 
+# TODO
+# fix fotmob score at end of 90 mins (e.g. WC final 3370572)
+# dynamic subplot ratios depending on whether tickboxes selected
+
 N_SIMS = 100000
 SEED = 0
 

@@ -140,7 +140,7 @@ def plot_margins(
     io=None,
     source=None,
 ):
-    fig, ax = plt.subplots(nrows=3, figsize=(8, 8), height_ratios=[5, 10, 2])
+    fig, ax = plt.subplots(nrows=3, figsize=(8, 8), height_ratios=[8.5, 12, 3.5])
 
     sns.histplot(
         data=df_match_outcomes,
