@@ -2,7 +2,9 @@ import numpy as np
 import pandas as pd
 import streamlit as st
 import matplotlib as mpl
+import matplotlib.pyplot as plt
 import requests
+import io
 
 from functions import simulate
 
@@ -207,10 +209,21 @@ else:  # fotmob
 if input_flag:
     st.header('Match outcomes')
 
-    fig, ax = simulate.plot_margins(df_match_outcomes, home_team_observed_goals, away_team_observed_goals, simulated_home_win_percent,
-                            simulated_draw_percent, simulated_away_win_percent, percentage_of_sims_matching_actual_score, total_home_xg, total_away_xg, match_date=match_date, home_team=home_team_name, away_team=away_team_name, extra_plot_comment=extra_plot_comment)
+    img = io.BytesIO()
 
+    fig, ax = simulate.plot_margins(df_match_outcomes, home_team_observed_goals, away_team_observed_goals, simulated_home_win_percent,
+                            simulated_draw_percent, simulated_away_win_percent, percentage_of_sims_matching_actual_score, total_home_xg, total_away_xg, match_date=match_date, home_team=home_team_name, away_team=away_team_name, extra_plot_comment=extra_plot_comment, io=img)
+    
     st.pyplot(fig=fig)
+
+    file_name = 'simulated_xg.png'
+
+    btn = st.download_button(
+    label="Download plot of simulated match outcomes",
+    data=img,
+    file_name=file_name,
+    mime="image/png"
+    )
 
     fig, ax = simulate.plot_exact_scores(df_match_outcomes)
 

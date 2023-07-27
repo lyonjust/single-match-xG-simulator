@@ -106,18 +106,20 @@ def get_sims_matching_score(df_match_outcomes, home_team_observed_goals, away_te
     return simulated_home_win_percent, simulated_away_win_percent, simulated_draw_percent, percentage_of_sims_matching_actual_score
 
 
-def plot_margins(df_match_outcomes, home_team_observed_goals, away_team_observed_goals, simulated_home_win_percent, simulated_draw_percent, simulated_away_win_percent, percentage_of_sims_matching_actual_score, total_home_xg, total_away_xg, match_date=None, home_team='Home team', away_team='Away team', extra_plot_comment=''):
-    fig, ax = plt.subplots()
+def plot_margins(df_match_outcomes, home_team_observed_goals, away_team_observed_goals, simulated_home_win_percent, simulated_draw_percent, simulated_away_win_percent, percentage_of_sims_matching_actual_score, total_home_xg, total_away_xg, match_date=None, home_team='Home team', away_team='Away team', extra_plot_comment='', io=None):
+    fig, ax = plt.subplots(nrows=2, figsize=(8,7), height_ratios=[1,3])
 
     sns.histplot(data=df_match_outcomes, x='home_margin', discrete=True,
-                 stat='density', hue='match_outcome', palette=outcome_colours, ax=ax, zorder=1, alpha=1, legend=False)
+                 stat='density', hue='match_outcome', palette=outcome_colours, ax=ax[1], zorder=1, alpha=1, legend=False)
 
-    ax.spines['top'].set_visible(False)
-    ax.spines['right'].set_visible(False)
-    ax.set_ylabel('Percent of Simulations')  # , rotation=0)
-    ax.set_xlabel('Full Time Margin (Home Team Goals - Away Team Goals)')
+    ax[0].set_axis_off()
+    
+    ax[1].spines['top'].set_visible(False)
+    ax[1].spines['right'].set_visible(False)
+    ax[1].set_ylabel('Percent of Simulations')  # , rotation=0)
+    ax[1].set_xlabel('Full Time Margin (Home Team Goals - Away Team Goals)')
 
-    ax.yaxis.set_major_formatter(mtick.PercentFormatter(1, 0))
+    ax[1].yaxis.set_major_formatter(mtick.PercentFormatter(1, 0))
 
     plot_title = home_team + ' (home) ' + f'{total_home_xg:.2f}' + \
         ' xG - ' + away_team + ' (away) ' + f'{total_away_xg:.2f}' + ' xG'
@@ -127,7 +129,7 @@ def plot_margins(df_match_outcomes, home_team_observed_goals, away_team_observed
     else:
         date_str = '\n'
 
-    title = fig_text(x=0.12, y=1.5,
+    title = fig_text(x=0.12, y=0.9,
                      s='<' + plot_title + '>' + date_str + '\n\nActual outcome: ' + home_team + ' ' + f'{home_team_observed_goals:.0f}' + ' - ' + away_team + ' ' + f'{away_team_observed_goals:.0f}' + '\n\n<Home team wins> in ' + simulated_home_win_percent +
                      ' of simulations\n<Away team wins> in ' +
                      simulated_away_win_percent + ' of simulations\n<Match is drawn> in ' +
@@ -141,7 +143,11 @@ def plot_margins(df_match_outcomes, home_team_observed_goals, away_team_observed
                          {"color": outcome_colours['Away win'],
                              "weight": "bold"},
                          {"color": outcome_colours['Draw'], "weight": "bold"}])
+       
+    fig.tight_layout()
 
+    fig.savefig(io, format='png')
+    
     return fig, ax
 
 
