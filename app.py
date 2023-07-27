@@ -37,7 +37,7 @@ caption = caption + \
 fotmob_helper = '\nFotMob match IDs are found from the digits after the "match" part of the match details URL: fotmob.com/match/***<match_id>***/matchfacts/<home_team>-vs-<away_team>'
 caption = caption + fotmob_helper
 
-with st.expander('Click here for an explanation of how and why to use this app'):
+with st.expander('Click here for an explanation of how to use this app'):
     st.write(caption)
 
 custom_or_understat_or_fotmob = st.radio(
