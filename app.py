@@ -1,10 +1,12 @@
 import numpy as np
 import pandas as pd
 import streamlit as st
+import streamlit.components.v1 as components
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import requests
 import io
+import urllib.parse
 
 from functions import simulate
 
@@ -20,6 +22,8 @@ rng = np.random.default_rng(SEED)
 mpl.rcParams["figure.dpi"] = 300
 
 st.set_page_config(page_title="xG simulator", page_icon="⚽")
+
+streamlit_app_url = "https://single-match-xg-simulator.streamlit.app"
 
 st.title("Single match xG simulator")
 
@@ -276,7 +280,7 @@ if input_flag:
 
     img = io.BytesIO()
 
-    fig, ax = simulate.plot_margins(
+    fig, ax, plot_title = simulate.plot_margins(
         df_match_outcomes,
         home_team_observed_goals,
         away_team_observed_goals,
@@ -292,6 +296,7 @@ if input_flag:
         extra_plot_comment=extra_plot_comment,
         io=img,
         source=source,
+        app_url=streamlit_app_url,
     )
 
     st.pyplot(fig=fig)
@@ -303,6 +308,27 @@ if input_flag:
         data=img,
         file_name=file_name,
         mime="image/png",
+    )
+
+    # data-related="lyonjust"
+    # data-via="lyonjust"
+    # data-hashtags="xg_simulator"
+
+    components.html(
+        '''
+        <a href="https://twitter.com/intent/tweet" class="twitter-share-button" 
+        data-text="'''
+        + plot_title
+        + """"
+        data-url="""
+        + streamlit_app_url
+        + """
+        data-size="large" 
+        >
+        Tweet
+        </a>
+        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    """
     )
 
     fig, ax = simulate.plot_exact_scores(df_match_outcomes)

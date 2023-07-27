@@ -139,6 +139,7 @@ def plot_margins(
     extra_plot_comment="",
     io=None,
     source=None,
+    app_url=None,
 ):
     fig, ax = plt.subplots(nrows=3, figsize=(8, 8), height_ratios=[8.5, 12, 3.5])
 
@@ -215,7 +216,24 @@ def plot_margins(
         ],
     )
 
-    footer_text = "https://single-match-xg-simulator.streamlit.app"
+    text_areas = [t for i, t in enumerate(title.text_areas) if i != 1]
+
+    text_areas = [t.get_text() for t in text_areas]
+
+    text_areas.insert(1, "\n\n")
+    text_areas.insert(3, "\n\n")
+    text_areas.insert(6, "\n")
+    text_areas.insert(9, "\n")
+    text_areas.insert(12, "\n")
+
+    title_string = "".join(text_areas)
+    title_string = title_string.replace(" (home)", "")
+    title_string = title_string.replace(" (away)", "")
+    title_string = title_string.replace(" of simulations", "")
+
+    title_string = title_string + "\n\n"
+
+    footer_text = app_url
     footer_text = footer_text + "\nBuilt by @lyonjust"
 
     if source == "fotmob":
@@ -229,7 +247,7 @@ def plot_margins(
 
     fig.savefig(io, format="png")
 
-    return fig, ax
+    return fig, ax, title_string
 
 
 def plot_exact_scores(df_match_outcomes):
