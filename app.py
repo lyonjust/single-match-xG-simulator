@@ -13,6 +13,7 @@ from functions import simulate
 # TODO
 # fix fotmob score at end of 90 mins (e.g. WC final 3370572)
 # dynamic subplot ratios depending on whether tickboxes selected
+# show team names highlighted, not "Home team wins in"
 
 N_SIMS = 100000
 SEED = 0
@@ -118,7 +119,7 @@ else:  # fotmob
     fotmob_caption = fotmob_caption + "\n\n" + fotmob_helper
     st.caption(fotmob_caption)
 
-    fotmob_match_id = st.text_input("FotMob match ID")
+    fotmob_match_id = st.text_input("FotMob match ID").strip()
 
     # cater for teams with no shots?
 
@@ -126,154 +127,181 @@ else:  # fotmob
     url_match_details = "matchDetails?matchId="
 
     if fotmob_match_id:
-        input_flag = True
+        if not fotmob_match_id.isdigit():
+            st.write("A FotMob match ID must only contain numbers. Please try again.")
 
-        url_complete = url_base + url_match_details + fotmob_match_id
-
-        match_summary = requests.get(url_complete).json()
-        shot_summary = match_summary["content"]["shotmap"]["shots"]
-
-        match_date = pd.to_datetime(match_summary["general"]["matchTimeUTCDate"])
-
-        home_team_name = match_summary["general"]["homeTeam"]["name"]
-        home_team_id = match_summary["general"]["homeTeam"]["id"]
-
-        away_team_name = match_summary["general"]["awayTeam"]["name"]
-        away_team_id = match_summary["general"]["awayTeam"]["id"]
-
-        home_goals_actual = [
-            team["score"]
-            for team in match_summary["header"]["teams"]
-            if team["id"] == home_team_id
-        ][0]
-        away_goals_actual = [
-            team["score"]
-            for team in match_summary["header"]["teams"]
-            if team["id"] == away_team_id
-        ][0]
-
-        st.header(home_team_name + " v " + away_team_name)
-
-        if len(shot_summary) == 0:
-            st.write(
-                "Sorry, FotMob does not track shots for this match. Please try another match ID."
-            )
-            input_flag = False
         else:
-            source = "fotmob"
+            input_flag = True
 
-            shot_summary_no_shootout = [
-                shot for shot in shot_summary if shot["period"] != "PenaltyShootout"
-            ]
+            url_complete = url_base + url_match_details + fotmob_match_id
 
-            shots_in_extra_time = [
-                shot
-                for shot in shot_summary
-                if shot["period"] in ["FirstHalfExtra", "SecondHalfExtra"]
-            ]
+            match_summary = requests.get(url_complete).json()
 
-            extra_plot_comment = ""
+            if not match_summary["general"]["homeTeam"]["id"]:
+                st.write(
+                    "Sorry, match ID "
+                    + fotmob_match_id
+                    + " does not exist in the FotMob database. Please try again."
+                )
+                input_flag = False
 
-            simulate_result_90_mins_only = False
-            if shots_in_extra_time:
-                simulate_result_90_mins_only = st.checkbox(
-                    "Simulate result at end of 90 minutes (i.e. ignore extra time)",
-                    value=False,
+            else:
+                shot_summary = match_summary["content"]["shotmap"]["shots"]
+
+                match_date = pd.to_datetime(
+                    match_summary["general"]["matchTimeUTCDate"]
                 )
 
-            if simulate_result_90_mins_only:
-                shot_summary_no_shootout = [
-                    shot
-                    for shot in shot_summary_no_shootout
-                    if shot["period"] in ["FirstHalf", "SecondHalf"]
-                ]
+                home_team_name = match_summary["general"]["homeTeam"]["name"]
+                home_team_id = match_summary["general"]["homeTeam"]["id"]
 
-                extra_plot_comment += (
-                    "Result simulated to end of 90 minutes regulation time\n"
-                )
+                away_team_name = match_summary["general"]["awayTeam"]["name"]
+                away_team_id = match_summary["general"]["awayTeam"]["id"]
 
-            penalties_not_in_shootout = [
-                shot
-                for shot in shot_summary
-                if shot["situation"] == "Penalty"
-                and shot["period"] != "PenaltyShootout"
-            ]
+                home_goals_actual = [
+                    team["score"]
+                    for team in match_summary["header"]["teams"]
+                    if team["id"] == home_team_id
+                ][0]
+                away_goals_actual = [
+                    team["score"]
+                    for team in match_summary["header"]["teams"]
+                    if team["id"] == away_team_id
+                ][0]
 
-            exclude_penalties = False
-            if penalties_not_in_shootout:
-                exclude_penalties = st.checkbox(
-                    "Exclude penalties awarded (i.e. simulate NPxG)", value=False
-                )
+                st.header(home_team_name + " v " + away_team_name)
 
-            if exclude_penalties:
-                shot_summary_no_shootout = [
-                    shot
-                    for shot in shot_summary_no_shootout
-                    if shot["situation"] != "Penalty"
-                ]
+                if len(shot_summary) == 0:
+                    st.write(
+                        "Sorry, FotMob does not track shots for this match. Please try another match ID."
+                    )
+                    input_flag = False
+                else:
+                    source = "fotmob"
 
-                extra_plot_comment += "Simulations based on non-penalty xG (NPxG) only"
+                    shot_summary_no_shootout = [
+                        shot
+                        for shot in shot_summary
+                        if shot["period"] != "PenaltyShootout"
+                    ]
 
-            home_shots_list = [
-                [
-                    shot["min"],
-                    shot["playerName"],
-                    shot["situation"],
-                    shot["expectedGoals"],
-                    shot["eventType"],
-                ]
-                for shot in shot_summary_no_shootout
-                if shot["teamId"] == home_team_id
-            ]
-            away_shots_list = [
-                [
-                    shot["min"],
-                    shot["playerName"],
-                    shot["situation"],
-                    shot["expectedGoals"],
-                    shot["eventType"],
-                ]
-                for shot in shot_summary_no_shootout
-                if shot["teamId"] == away_team_id
-            ]
+                    shots_in_extra_time = [
+                        shot
+                        for shot in shot_summary
+                        if shot["period"] in ["FirstHalfExtra", "SecondHalfExtra"]
+                    ]
 
-            columns = ["Minute", "Player", "Situation", "xG", "Outcome"]
+                    extra_plot_comment = ""
 
-            df_home_shots = pd.DataFrame(home_shots_list, columns=columns)
-            df_away_shots = pd.DataFrame(away_shots_list, columns=columns)
+                    simulate_result_90_mins_only = False
+                    if shots_in_extra_time:
+                        simulate_result_90_mins_only = st.checkbox(
+                            "Simulate result at end of 90 minutes (i.e. ignore extra time)",
+                            value=False,
+                        )
 
-            total_home_xg = df_home_shots["xG"].sum()
-            total_away_xg = df_away_shots["xG"].sum()
+                    if simulate_result_90_mins_only:
+                        shot_summary_no_shootout = [
+                            shot
+                            for shot in shot_summary_no_shootout
+                            if shot["period"] in ["FirstHalf", "SecondHalf"]
+                        ]
 
-            home_goals = simulate.simulate_chances(rng, N_SIMS, df_home_shots["xG"])
-            away_goals = simulate.simulate_chances(rng, N_SIMS, df_away_shots["xG"])
-            home_margin = home_goals - away_goals
+                        extra_plot_comment += (
+                            "Result simulated to end of 90 minutes regulation time\n"
+                        )
 
-            df_match_outcomes = simulate.get_match_outcomes(
-                home_goals, away_goals, home_margin
-            )
+                    penalties_not_in_shootout = [
+                        shot
+                        for shot in shot_summary
+                        if shot["situation"] == "Penalty"
+                        and shot["period"] != "PenaltyShootout"
+                    ]
 
-            home_team_observed_goals = int(home_goals_actual)
-            away_team_observed_goals = int(away_goals_actual)
+                    exclude_penalties = False
+                    if penalties_not_in_shootout:
+                        exclude_penalties = st.checkbox(
+                            "Exclude penalties awarded (i.e. simulate NPxG)",
+                            value=False,
+                        )
 
-            (
-                simulated_home_win_percent,
-                simulated_away_win_percent,
-                simulated_draw_percent,
-                percentage_of_sims_matching_actual_score,
-            ) = simulate.get_sims_matching_score(
-                df_match_outcomes, home_team_observed_goals, away_team_observed_goals
-            )
+                    if exclude_penalties:
+                        shot_summary_no_shootout = [
+                            shot
+                            for shot in shot_summary_no_shootout
+                            if shot["situation"] != "Penalty"
+                        ]
 
-            st.header("Shot details")
+                        extra_plot_comment += (
+                            "Simulations based on non-penalty xG (NPxG) only"
+                        )
 
-            st.subheader(home_team_name + " (home)")
+                    home_shots_list = [
+                        [
+                            shot["min"],
+                            shot["playerName"],
+                            shot["situation"],
+                            shot["expectedGoals"],
+                            shot["eventType"],
+                        ]
+                        for shot in shot_summary_no_shootout
+                        if shot["teamId"] == home_team_id
+                    ]
+                    away_shots_list = [
+                        [
+                            shot["min"],
+                            shot["playerName"],
+                            shot["situation"],
+                            shot["expectedGoals"],
+                            shot["eventType"],
+                        ]
+                        for shot in shot_summary_no_shootout
+                        if shot["teamId"] == away_team_id
+                    ]
 
-            st.dataframe(df_home_shots)
+                    columns = ["Minute", "Player", "Situation", "xG", "Outcome"]
 
-            st.subheader(away_team_name + " (away)")
+                    df_home_shots = pd.DataFrame(home_shots_list, columns=columns)
+                    df_away_shots = pd.DataFrame(away_shots_list, columns=columns)
 
-            st.dataframe(df_away_shots)
+                    total_home_xg = df_home_shots["xG"].sum()
+                    total_away_xg = df_away_shots["xG"].sum()
+
+                    home_goals = simulate.simulate_chances(
+                        rng, N_SIMS, df_home_shots["xG"]
+                    )
+                    away_goals = simulate.simulate_chances(
+                        rng, N_SIMS, df_away_shots["xG"]
+                    )
+                    home_margin = home_goals - away_goals
+
+                    df_match_outcomes = simulate.get_match_outcomes(
+                        home_goals, away_goals, home_margin
+                    )
+
+                    home_team_observed_goals = int(home_goals_actual)
+                    away_team_observed_goals = int(away_goals_actual)
+
+                    (
+                        simulated_home_win_percent,
+                        simulated_away_win_percent,
+                        simulated_draw_percent,
+                        percentage_of_sims_matching_actual_score,
+                    ) = simulate.get_sims_matching_score(
+                        df_match_outcomes,
+                        home_team_observed_goals,
+                        away_team_observed_goals,
+                    )
+
+                    st.header("Shot details")
+
+                    st.subheader(home_team_name + " (home)")
+
+                    st.dataframe(df_home_shots)
+
+                    st.subheader(away_team_name + " (away)")
+
+                    st.dataframe(df_away_shots)
 
 if input_flag:
     st.header("Match outcomes")
