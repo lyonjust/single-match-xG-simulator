@@ -53,7 +53,7 @@ caption = (
     + 'If you choose a **FotMob match ID**, you can enter a valid match ID from FotMob (e.g. "3854572") and the app will perform the simulation based on the shot details recorded for this match. Penalty shootouts are excluded from these analyses.\n'
 )
 
-fotmob_helper = '\nFotMob match IDs are found from the digits after the "match" part of the match details URL: fotmob.com/match/***<match_id>***/matchfacts/<home_team>-vs-<away_team>'
+fotmob_helper = '\nFotMob match IDs are found from the digits after the hash ("#") at the end of the match details URL: fotmob.com/matches/<home_team>-vs-<away_team>/<alpha_id>#***<match_id>***/'
 caption = caption + fotmob_helper
 
 with st.expander("Click here for an explanation of how to use this app"):
