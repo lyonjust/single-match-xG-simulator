@@ -48,13 +48,13 @@ caption = (
     caption
     + "If you choose a **custom match**, you can enter any sequence of custom xG values for a hypothetical home and away team, as well as a hypothetical match result.\n\n"
 )
-caption = (
-    caption
-    + 'If you choose a **FotMob match ID**, you can enter a valid match ID from FotMob (e.g. "3854572") and the app will perform the simulation based on the shot details recorded for this match. Penalty shootouts are excluded from these analyses.\n'
-)
+# caption = (
+#     caption
+#     + 'If you choose a **FotMob match ID**, you can enter a valid match ID from FotMob (e.g. "3854572") and the app will perform the simulation based on the shot details recorded for this match. Penalty shootouts are excluded from these analyses.\n'
+# )
 
 fotmob_helper = '\nFotMob match IDs are the digits after the hash ("#") at the very end of the match details URL: fotmob.com/matches/<home_team>-vs-<away_team>/<alpha_id>#***<match_id>***'
-caption = caption + fotmob_helper
+# caption = caption + fotmob_helper
 
 with st.expander("Click here for an explanation of how to use this app"):
     st.write(caption)
@@ -115,11 +115,12 @@ if custom_or_understat_or_fotmob == "Custom match":
     )
 
 else:  # fotmob
-    fotmob_caption = "Please enter the match ID of an FotMob match, e.g. 3854572"
-    fotmob_caption = fotmob_caption + "\n\n" + fotmob_helper
+#     fotmob_caption = "Please enter the match ID of an FotMob match, e.g. 3854572"
+#     fotmob_caption = fotmob_caption + "\n\n" + fotmob_helper
+	fotmob_caption = "Unfortunately, in November 2024 FotMob enforced additional restrictions on their API, rendering this app broken until further notice."
     st.caption(fotmob_caption)
 
-    fotmob_match_id = st.text_input("FotMob match ID").strip()
+    # fotmob_match_id = st.text_input("FotMob match ID").strip()
 
     # cater for teams with no shots?
 
