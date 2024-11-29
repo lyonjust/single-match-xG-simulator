@@ -117,7 +117,7 @@ if custom_or_understat_or_fotmob == "Custom match":
 else:  # fotmob
 #     fotmob_caption = "Please enter the match ID of an FotMob match, e.g. 3854572"
 #     fotmob_caption = fotmob_caption + "\n\n" + fotmob_helper
-	fotmob_caption = "Unfortunately, in November 2024 FotMob enforced additional restrictions on their API, rendering this app broken until further notice."
+    fotmob_caption = "Unfortunately, in November 2024 FotMob enforced additional restrictions on their API, rendering this app broken until further notice."
     st.caption(fotmob_caption)
 
     # fotmob_match_id = st.text_input("FotMob match ID").strip()
